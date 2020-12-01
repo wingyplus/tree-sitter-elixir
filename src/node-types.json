@@ -1,5 +1,10 @@
 [
   {
+    "type": "boolean",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -9,6 +14,10 @@
       "types": [
         {
           "type": "atom",
+          "named": true
+        },
+        {
+          "type": "boolean",
           "named": true
         },
         {
@@ -27,11 +36,19 @@
     "named": true
   },
   {
+    "type": "false",
+    "named": false
+  },
+  {
     "type": "number",
     "named": true
   },
   {
     "type": "string",
     "named": true
+  },
+  {
+    "type": "true",
+    "named": false
   }
 ]

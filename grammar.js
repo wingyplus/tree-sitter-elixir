@@ -60,6 +60,7 @@ module.exports = grammar({
         $.number,
         $.atom,
         $.string,
+        $.boolean,
       )
     ),
     number: $ => token(
@@ -81,6 +82,7 @@ module.exports = grammar({
         singleLineString,
         multiLineString,
       )
-    )
+    ),
+    boolean: $ => choice("true", "false")
   }
 })
