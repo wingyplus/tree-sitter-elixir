@@ -95,6 +95,7 @@ module.exports = grammar({
             $.atom,
             $.string,
             $.boolean,
+            $.list,
           ),
           optional(","),
         ),

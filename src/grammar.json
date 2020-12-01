@@ -708,6 +708,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "boolean"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "list"
                   }
                 ]
               },

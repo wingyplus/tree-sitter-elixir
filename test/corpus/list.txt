@@ -14,9 +14,14 @@ List With Elements
 
 [1, 2, 3]
 [true, "hello", 3]
+[
+  true,
+  [1, 2, 3]
+]
 
 ---
 
 (source_file
   (list (number) (number) (number))
-  (list (boolean) (string) (number)))
+  (list (boolean) (string) (number))
+  (list (boolean) (list (number) (number) (number))))

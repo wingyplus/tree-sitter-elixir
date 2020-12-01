@@ -45,6 +45,10 @@
           "named": true
         },
         {
+          "type": "list",
+          "named": true
+        },
+        {
           "type": "number",
           "named": true
         },
