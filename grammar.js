@@ -17,12 +17,35 @@ const integer = choice(
 
 const float = seq(repeat1(decimalDigits), ".", repeat1(DECIMAL_DIGIT), repeat(seq(optional(choice("e", "E")), DECIMAL_DIGIT)))
 
+const symbolOperators = choice(
+  "@",
+  ".",
+  "+", "-", "!", "^", "not", "~~~",
+  "*", "/",
+  "++", "--", "..", "<>", "+++", "---",
+  "^^^",
+  "|>", "<<<", ">>>", "<<~", "~>>", "<~", "~>", "<~>", "<|>",
+  ">", "<", "<=", ">=",
+  "==", "!=", "=~", "===", "!==",
+  "&&", "&&&",
+  "||", "|||",
+  "=",
+  "&",
+  "|",
+  "::",
+  "<-",
+  "\\\\" // "\\"
+)
+
 module.exports = grammar({
   name: "elixir",
 
   rules: {
-    source_file: $ => choice(
-      $.number,
+    source_file: $ => repeat(
+      choice(
+        $.number,
+        $.atom,
+      )
     ),
     number: $ => token(
       choice(
@@ -30,5 +53,11 @@ module.exports = grammar({
         float,
       )
     ),
+    atom: $ => token(
+      choice(
+        seq(":", /[_a-zA-Z]/, repeat(/[0-9a-zA-Z_@]/), optional(choice("?", "!"))),
+        seq(":", symbolOperators),
+      )
+    )
   }
 })

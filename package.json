@@ -10,5 +10,9 @@
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.17.3"
+  },
+  "scripts": {
+    "test": "yarn run generate && tree-sitter test",
+    "generate": "tree-sitter generate"
   }
 }
