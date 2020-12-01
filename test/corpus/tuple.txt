@@ -3,14 +3,25 @@ Tuple
 ===========
 
 {}
-{1,2,3}
+{1, 2, 3}
 {[:a], 1, true}
 
 ---
 
 (source_file
-  (tuple) (tuple (number) (number) (number))
+  (tuple)
+  (tuple (number) (number) (number))
   (tuple
     (list (atom))
     (number)
     (boolean)))
+
+====================
+Tuple - Separator
+====================
+
+{1 2}
+
+---
+
+(source_file (tuple (number) (ERROR (number))))

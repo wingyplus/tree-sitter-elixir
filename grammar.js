@@ -89,7 +89,7 @@ module.exports = grammar({
     boolean: $ => choice("true", "false"),
     list: $ => seq(
       "[",
-      repeat(
+      optional(
         seq(
           choice(
             $.number,
@@ -98,14 +98,26 @@ module.exports = grammar({
             $.boolean,
             $.list,
           ),
-          optional(","),
-        ),
+          repeat(
+            seq(
+              ",",
+              choice(
+                $.number,
+                $.atom,
+                $.string,
+                $.boolean,
+                $.list,
+              )
+            )
+          )
+        )
       ),
       "]"
     ),
+    // TODO: optional trailing comma support. ({1,2,3,})
     tuple: $ => seq(
       "{",
-      repeat(
+      optional(
         seq(
           choice(
             $.number,
@@ -114,7 +126,18 @@ module.exports = grammar({
             $.boolean,
             $.list,
           ),
-          optional(",")
+          repeat(
+            seq(
+              ",",
+              choice(
+                $.number,
+                $.atom,
+                $.string,
+                $.boolean,
+                $.list,
+              )
+            )
+          )
         )
       ),
       "}"

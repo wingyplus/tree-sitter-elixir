@@ -25,3 +25,13 @@ List With Elements
   (list (number) (number) (number))
   (list (boolean) (string) (number))
   (list (boolean) (list (number) (number) (number))))
+
+===========
+List - Error
+===========
+
+[1 2]
+
+---
+
+(source_file (list (number) (ERROR (number))))
