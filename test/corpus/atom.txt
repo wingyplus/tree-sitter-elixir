@@ -1,0 +1,38 @@
+==============
+Atom - Unquoted
+==============
+
+:abcd
+:_ab_cd_
+:ISO8601
+:a@localhost
+:a@localhost?
+:a@localhost!
+
+---
+
+(source_file (atom) (atom) (atom) (atom) (atom) (atom))
+
+==============
+Atom - Operator
+==============
+
+:++
+:--
+:::
+:\\
+
+---
+
+(source_file (atom) (atom) (atom) (atom))
+
+==============
+Atom - Quoted
+==============
+
+:'hello'
+:"Hello"
+
+---
+
+(source_file (atom) (atom))
