@@ -17,7 +17,7 @@ Tuple
     (boolean)))
 
 ====================
-Tuple - Separator
+Tuple - Error
 ====================
 
 {1 2}
@@ -25,3 +25,13 @@ Tuple - Separator
 ---
 
 (source_file (tuple (number) (ERROR (number))))
+
+====================
+Tuple - Trailing Separator
+====================
+
+{1,2,3,}
+
+---
+
+(source_file (tuple (number) (number) (number)))

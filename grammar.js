@@ -89,34 +89,26 @@ module.exports = grammar({
     boolean: $ => choice("true", "false"),
     list: $ => seq(
       "[",
-      optional(
-        commaSeparator(
-          choice(
-            $.number,
-            $.atom,
-            $.string,
-            $.boolean,
-            $.list,
-          ),
-        )
-      ),
+      optional($._trailing_comma_separator_elements),
       "]"
     ),
-    // TODO: optional trailing comma support. ({1,2,3,})
     tuple: $ => seq(
       "{",
-      optional(
-        commaSeparator(
-          choice(
-            $.number,
-            $.atom,
-            $.string,
-            $.boolean,
-            $.list,
-          ),
-        )
-      ),
+      optional($._trailing_comma_separator_elements),
       "}"
+    ),
+    _trailing_comma_separator_elements: $ => seq(
+      commaSeparator(
+        choice(
+          $.number,
+          $.atom,
+          $.string,
+          $.boolean,
+          $.list,
+          $.tuple,
+        ),
+      ),
+      optional(",")
     ),
     defmodule: $ => seq(
       "defmodule", $.atom, $.do

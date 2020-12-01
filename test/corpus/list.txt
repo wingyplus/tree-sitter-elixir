@@ -35,3 +35,13 @@ List - Error
 ---
 
 (source_file (list (number) (ERROR (number))))
+
+====================
+List - Trailing Separator
+====================
+
+[1,2,3,]
+
+---
+
+(source_file (list (number) (number) (number)))
