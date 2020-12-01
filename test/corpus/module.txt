@@ -1,0 +1,10 @@
+============
+Module
+============
+
+defmodule :a do
+end
+
+---
+
+(source_file (defmodule (atom) (do)))

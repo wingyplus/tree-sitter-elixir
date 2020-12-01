@@ -5,6 +5,30 @@
     "fields": {}
   },
   {
+    "type": "defmodule",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "atom",
+          "named": true
+        },
+        {
+          "type": "do",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "do",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -21,6 +45,10 @@
           "named": true
         },
         {
+          "type": "defmodule",
+          "named": true
+        },
+        {
           "type": "number",
           "named": true
         },
@@ -34,6 +62,18 @@
   {
     "type": "atom",
     "named": true
+  },
+  {
+    "type": "defmodule",
+    "named": false
+  },
+  {
+    "type": "do",
+    "named": false
+  },
+  {
+    "type": "end",
+    "named": false
   },
   {
     "type": "false",

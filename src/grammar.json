@@ -21,6 +21,10 @@
           {
             "type": "SYMBOL",
             "name": "boolean"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "defmodule"
           }
         ]
       }
@@ -667,6 +671,36 @@
         {
           "type": "STRING",
           "value": "false"
+        }
+      ]
+    },
+    "defmodule": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "defmodule"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "atom"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "do"
+        }
+      ]
+    },
+    "do": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "do"
+        },
+        {
+          "type": "STRING",
+          "value": "end"
         }
       ]
     }
