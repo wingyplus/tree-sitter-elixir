@@ -90,7 +90,7 @@ module.exports = grammar({
     list: $ => seq(
       "[",
       optional(
-        seq(
+        commaSeparator(
           choice(
             $.number,
             $.atom,
@@ -98,18 +98,6 @@ module.exports = grammar({
             $.boolean,
             $.list,
           ),
-          repeat(
-            seq(
-              ",",
-              choice(
-                $.number,
-                $.atom,
-                $.string,
-                $.boolean,
-                $.list,
-              )
-            )
-          )
         )
       ),
       "]"
@@ -118,7 +106,7 @@ module.exports = grammar({
     tuple: $ => seq(
       "{",
       optional(
-        seq(
+        commaSeparator(
           choice(
             $.number,
             $.atom,
@@ -126,18 +114,6 @@ module.exports = grammar({
             $.boolean,
             $.list,
           ),
-          repeat(
-            seq(
-              ",",
-              choice(
-                $.number,
-                $.atom,
-                $.string,
-                $.boolean,
-                $.list,
-              )
-            )
-          )
         )
       ),
       "}"
@@ -148,3 +124,11 @@ module.exports = grammar({
     do: $ => seq("do", "end")
   }
 })
+
+function separator(rule, sep) {
+  return seq(rule, repeat(seq(sep, rule)))
+}
+
+function commaSeparator(rule) {
+  return separator(rule, ",")
+}
