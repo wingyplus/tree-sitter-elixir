@@ -13,6 +13,8 @@
   },
   "scripts": {
     "test": "yarn run generate && tree-sitter test",
-    "generate": "tree-sitter generate"
+    "generate": "tree-sitter generate",
+    "build:wasm": "tree-sitter build-wasm",
+    "web": "yarn run build:wasm && tree-sitter web-ui"
   }
 }
