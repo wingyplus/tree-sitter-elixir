@@ -1,0 +1,139 @@
+===============
+Integer
+===============
+
+1
+
+---
+
+(source_file (number))
+
+===============
+Integer Multi Digits
+===============
+
+1123
+
+---
+
+(source_file (number))
+
+===============
+Integer With Underscore
+===============
+
+1_0
+
+---
+
+(source_file (number))
+
+===============
+Binary Integer
+===============
+
+0b111001
+
+---
+
+(source_file (number))
+
+===============
+Binary Integer With Underscore
+===============
+
+0b1_110_01
+
+---
+
+(source_file (number))
+
+===============
+Hex Integer
+===============
+
+0x123456789abcdefABCDEF
+
+---
+
+(source_file (number))
+
+===============
+Hex Integer With Underscore
+===============
+
+0x12345_6789abc_defABCDE_F
+
+---
+
+(source_file (number))
+
+===============
+Octal Integer
+===============
+
+0o1234567
+
+---
+
+(source_file (number))
+
+===============
+Octal Integer With Underscore
+===============
+
+0o1_2345_67
+
+---
+
+(source_file (number))
+
+===============
+Float
+===============
+
+1.23
+
+---
+
+(source_file (number))
+
+===============
+Float 2
+===============
+
+1299231451231.2312312
+
+---
+
+(source_file (number))
+
+===============
+Float With Underscore
+===============
+
+129923_14512_31.2312312
+
+---
+
+(source_file (number))
+
+===============
+Float With Underscore + Scientific Notation
+===============
+
+129923_14512_31.2E3123
+
+---
+
+(source_file (number))
+
+===============
+Float With Underscore + Scientific Notation 2
+===============
+
+129923_14512_31.2e3123
+
+---
+
+(source_file (number))
