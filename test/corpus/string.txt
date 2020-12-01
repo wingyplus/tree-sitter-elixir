@@ -1,0 +1,23 @@
+============
+String
+============
+
+"1234Hello WOrld"
+
+---
+
+(source_file (string))
+
+============
+String Multi Line
+============
+
+"""
+Hello
+
+ This is multi line.
+"""
+
+---
+
+(source_file (string))

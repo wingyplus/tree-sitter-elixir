@@ -37,6 +37,20 @@ const symbolOperators = choice(
   "\\\\" // "\\"
 )
 
+// TODO: unicode support.
+const singleLineString = seq(
+  '"',
+  repeat(/./),
+  '"',
+)
+
+// TODO: unicode support.
+const multiLineString = seq(
+  '"""',
+  repeat(choice(/./, /\n/)),
+  '"""'
+)
+
 module.exports = grammar({
   name: "elixir",
 
@@ -45,6 +59,7 @@ module.exports = grammar({
       choice(
         $.number,
         $.atom,
+        $.string,
       )
     ),
     number: $ => token(
@@ -59,6 +74,12 @@ module.exports = grammar({
         seq(":", symbolOperators),
         // TODO: unicode support.
         seq(":", choice("'", '"'), repeat(/[0-9a-zA-Z_@]/), choice("'", '"'))
+      )
+    ),
+    string: $ => token(
+      choice(
+        singleLineString,
+        multiLineString,
       )
     )
   }
