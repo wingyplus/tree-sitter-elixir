@@ -1,0 +1,22 @@
+===========
+List - Empty list
+===========
+
+[]
+
+---
+
+(source_file (list))
+
+===========
+List With Elements
+===========
+
+[1, 2, 3]
+[true, "hello", 3]
+
+---
+
+(source_file
+  (list (number) (number) (number))
+  (list (boolean) (string) (number)))

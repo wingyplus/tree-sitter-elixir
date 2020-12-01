@@ -61,6 +61,7 @@ module.exports = grammar({
         $.atom,
         $.string,
         $.boolean,
+        $.list,
         $.defmodule,
       )
     ),
@@ -85,6 +86,21 @@ module.exports = grammar({
       )
     ),
     boolean: $ => choice("true", "false"),
+    list: $ => seq(
+      "[",
+      repeat(
+        seq(
+          choice(
+            $.number,
+            $.atom,
+            $.string,
+            $.boolean,
+          ),
+          optional(","),
+        ),
+      ),
+      "]"
+    ),
     defmodule: $ => seq(
       "defmodule", $.atom, $.do
     ),
