@@ -57,6 +57,8 @@ module.exports = grammar({
       choice(
         seq(":", /[_a-zA-Z]/, repeat(/[0-9a-zA-Z_@]/), optional(choice("?", "!"))),
         seq(":", symbolOperators),
+        // TODO: unicode support.
+        seq(":", choice("'", '"'), repeat(/[0-9a-zA-Z_@]/), choice("'", '"'))
       )
     )
   }
