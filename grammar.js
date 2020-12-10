@@ -1,3 +1,9 @@
+///////////////////////////////////////////////////////////////////////////////
+//
+// Tokens
+//
+///////////////////////////////////////////////////////////////////////////////
+
 const DECIMAL_DIGIT = /[0-9]/
 const BINARY_DIGIT = /[0-1]/
 const HEX_DIGIT = /[0-9a-fA-F]/
@@ -37,6 +43,38 @@ const symbolOperators = choice(
   "\\\\" // "\\"
 )
 
+const ARROW = "->";
+const REV_ARROW = "<-";
+const BANG = "!";
+const BINARY_LEFT = "<<";
+const BINARY_RIGHT = ">>";
+const BRACE_LEFT = "{";
+const BRACE_RIGHT = "}";
+const BRACKET_LEFT = "[";
+const BRACKET_RIGHT = "]";
+const COLON = ":";
+const DOUBLE_COLON = "::";
+const COLON_EQUAL = ":=";
+const COMMA = ",";
+const DASH = "-";
+const DOT = ".";
+const DOT_DOT = "..";
+const DOT_DOT_DOT = "...";
+const EQUAL = "=";
+const FAT_ARROW = "=>";
+const REV_FAT_ARROW = "<=";
+const HASH = "#";
+const PARENS_LEFT = "(";
+const PARENS_RIGHT = ")";
+const PIPE = "|";
+const DOUBLE_PIPE = "||";
+const QUESTION = "?";
+const SEMI = ";";
+const SLASH = "/";
+const UNDERSCORE = "_";
+const STAR = "*";
+
+
 // TODO: unicode support.
 const singleLineString = seq(
   '"',
@@ -51,6 +89,27 @@ const multiLineString = seq(
   '"""'
 )
 
+///////////////////////////////////////////////////////////////////////////////
+//
+// Combinators
+//
+///////////////////////////////////////////////////////////////////////////////
+const sepBy = (sep, x) => seq(x, repeat(seq(sep, x)));
+const delim = (open, x, close) => seq(open, x, close);
+
+const tuple = (x) => delim(BRACE_LEFT, optional(sepBy(COMMA, x)), BRACE_RIGHT);
+const list = (x) => delim(BRACKET_LEFT, optional(sepBy(COMMA, x)), BRACKET_RIGHT);
+const parens = (x) => delim(PARENS_LEFT, x, PARENS_RIGHT);
+const args = (x) => field("arguments", parens(optional(sepBy(COMMA, x))));
+
+const oneOf = (x) => choice.apply(null, x);
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Grammar
+//
+///////////////////////////////////////////////////////////////////////////////
+
 module.exports = grammar({
   name: "elixir",
 
@@ -64,6 +123,8 @@ module.exports = grammar({
         $.list,
         $.tuple,
         $.defmodule,
+        $.def,
+        $.defp
       )
     ),
     number: $ => token(
@@ -97,6 +158,8 @@ module.exports = grammar({
       optional($._trailing_comma_separator_elements),
       "}"
     ),
+    variable: $ => /[_a-z\xC0-\xD6\xD8-\xDE\xDF-\xF6\xF8-\xFF][_a-zA-Z0-9\xC0-\xD6\xD8-\xDE]*/,
+    identifier: $ => /[a-z_]+/,
     _trailing_comma_separator_elements: $ => seq(
       commaSeparator(
         choice(
@@ -111,9 +174,15 @@ module.exports = grammar({
       optional(",")
     ),
     defmodule: $ => seq(
-      "defmodule", $.atom, $.do
+      "defmodule", $.atom, $.do_block
     ),
-    do: $ => seq("do", "end")
+    def: $ => seq(
+      "def", choice($.atom, $.identifier), optional(args($.variable)), $.do_block
+    ),
+    defp: $ => seq(
+      "defp", choice($.atom, $.identifier), $.do_block
+    ),
+    do_block: $ => choice(seq("do", "end"), seq("do:", repeat(/./))),
   }
 })
 

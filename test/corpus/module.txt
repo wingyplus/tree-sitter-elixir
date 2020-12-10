@@ -7,4 +7,4 @@ end
 
 ---
 
-(source_file (defmodule (atom) (do)))
+(source_file (defmodule (atom) (do_block)))

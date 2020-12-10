@@ -5,6 +5,52 @@
     "fields": {}
   },
   {
+    "type": "def",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "atom",
+          "named": true
+        },
+        {
+          "type": "do_block",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "defmodule",
     "named": true,
     "fields": {},
@@ -17,14 +63,37 @@
           "named": true
         },
         {
-          "type": "do",
+          "type": "do_block",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "do",
+    "type": "defp",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "atom",
+          "named": true
+        },
+        {
+          "type": "do_block",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "do_block",
     "named": true,
     "fields": {}
   },
@@ -80,7 +149,15 @@
           "named": true
         },
         {
+          "type": "def",
+          "named": true
+        },
+        {
           "type": "defmodule",
+          "named": true
+        },
+        {
+          "type": "defp",
           "named": true
         },
         {
@@ -138,6 +215,14 @@
     }
   },
   {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
     "type": ",",
     "named": false
   },
@@ -154,11 +239,23 @@
     "named": true
   },
   {
+    "type": "def",
+    "named": false
+  },
+  {
     "type": "defmodule",
     "named": false
   },
   {
+    "type": "defp",
+    "named": false
+  },
+  {
     "type": "do",
+    "named": false
+  },
+  {
+    "type": "do:",
     "named": false
   },
   {
@@ -168,6 +265,10 @@
   {
     "type": "false",
     "named": false
+  },
+  {
+    "type": "identifier",
+    "named": true
   },
   {
     "type": "number",
@@ -180,6 +281,10 @@
   {
     "type": "true",
     "named": false
+  },
+  {
+    "type": "variable",
+    "named": true
   },
   {
     "type": "{",
