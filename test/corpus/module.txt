@@ -1,5 +1,5 @@
 ============
-Module
+Module with atom
 ============
 
 defmodule :a do
@@ -8,3 +8,14 @@ end
 ---
 
 (source_file (defmodule (atom) (do_block)))
+
+============
+Module with Elixir uppercase atom
+============
+
+defmodule Example do
+end
+
+---
+
+(source_file (defmodule (uppercase_atom) (do_block)))

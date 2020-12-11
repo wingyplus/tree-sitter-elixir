@@ -61,6 +61,10 @@
           {
             "type": "atom",
             "named": true
+          },
+          {
+            "type": "uppercase_atom",
+            "named": true
           }
         ]
       }
@@ -296,6 +300,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "uppercase_atom",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "(",

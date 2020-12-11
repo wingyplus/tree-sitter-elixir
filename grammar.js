@@ -186,6 +186,7 @@ module.exports = grammar({
           seq(":", choice("'", '"'), repeat(/[0-9a-zA-Z_@]/), choice("'", '"'))
         )
       ),
+    uppercase_atom: ($) => seq(/[A-Z]/, repeat(/[0-9a-zA-Z_.]/)),
     string: ($) => token(choice(singleLineString, multiLineString)),
     boolean: ($) => choice("true", "false"),
     list: ($) =>
@@ -223,7 +224,12 @@ module.exports = grammar({
         $.defp,
         $.module_attribute
       ),
-    defmodule: ($) => seq("defmodule", field("modulename", $.atom), $.do_block),
+    defmodule: ($) =>
+      seq(
+        "defmodule",
+        field("modulename", choice($.uppercase_atom, $.atom)),
+        $.do_block
+      ),
     module_attribute: ($) => seq(AT_OP, $.identifier, $.expression),
     def: ($) =>
       seq(

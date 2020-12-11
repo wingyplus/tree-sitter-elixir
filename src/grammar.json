@@ -684,6 +684,22 @@
         ]
       }
     },
+    "uppercase_atom": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[A-Z]"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "PATTERN",
+            "value": "[0-9a-zA-Z_.]"
+          }
+        }
+      ]
+    },
     "string": {
       "type": "TOKEN",
       "content": {
@@ -956,8 +972,17 @@
           "type": "FIELD",
           "name": "modulename",
           "content": {
-            "type": "SYMBOL",
-            "name": "atom"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "uppercase_atom"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "atom"
+              }
+            ]
           }
         },
         {
