@@ -1,0 +1,18 @@
+================================================================================
+moduledoc attribute
+================================================================================
+defmodule :test do
+  @moduledoc "This is a module attribute"
+end
+--------------------------------------------------------------------------------
+
+(source_file
+  (defmodule (atom)
+    (do_block (expression
+      (module_attribute (identifier)
+        (expression (string))
+      ))
+    ))
+)
+
+

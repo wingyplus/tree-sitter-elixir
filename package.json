@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-elixir",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Tree Sitter for Elixir.",
   "main": "index.js",
   "author": "Thanabodee Charoenpiriyakij <wingyminus@gmail.com>",
@@ -9,12 +9,14 @@
     "nan": "^2.14.2"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.17.3"
+    "tree-sitter-cli": "^0.17.3",
+    "prettier": "^2.2.1"
   },
   "scripts": {
     "test": "yarn run generate && tree-sitter test",
     "generate": "tree-sitter generate",
     "build:wasm": "tree-sitter build-wasm",
-    "web": "yarn run build:wasm && tree-sitter web-ui"
+    "web": "yarn run build:wasm && tree-sitter web-ui",
+    "fmt": "prettier --write grammar.js"
   }
 }

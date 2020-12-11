@@ -9,6 +9,16 @@ Integer
 (source_file (number))
 
 ===============
+Negative
+===============
+
+-1
+
+---
+
+(source_file (number))
+
+===============
 Integer Multi Digits
 ===============
 
