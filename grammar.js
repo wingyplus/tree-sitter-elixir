@@ -105,10 +105,12 @@ const BRACE_LEFT = "{";
 const BRACE_RIGHT = "}";
 const BRACKET_LEFT = "[";
 const BRACKET_RIGHT = "]";
+const CHEVRON_LEFT = "<";
+const CHEVRON_RIGHT = ">";
 const COLON = ":";
-const DOUBLE_COLON = "::";
 const COMMA = ",";
 const DASH = "-";
+const DOUBLE_COLON = "::";
 const DOT_OP = ".";
 const DOT_DOT = "..";
 const DOT_DOT_DOT = "...";
@@ -126,6 +128,7 @@ const SEMI = ";";
 const SLASH = "/";
 const UNDERSCORE = "_";
 const STAR = "*";
+const TILDE = "~";
 
 // TODO: unicode support.
 const singleLineString = seq('"', repeat(/./), '"');
@@ -169,6 +172,7 @@ module.exports = grammar({
           $.boolean,
           $.list,
           $.map,
+          $.sigil,
           $.tuple,
           $.defmodule,
           $.def,
@@ -213,7 +217,7 @@ module.exports = grammar({
     string: ($) => token(choice(singleLineString, multiLineString)),
     binary_string: ($) =>
       seq(BINARY_LEFT, optional(sepBy(COMMA, $.bin_part)), BINARY_RIGHT),
-    bin_part: ($) => seq(choice($.number, $.string), optional($.bin_type_list)),
+    bin_part: ($) => seq(choice($.number, $.string, $.variable), optional($.bin_type_list)),
     // _bin_sized: ($) =>
     //   choice(pos_int, seq("size", PARENS_LEFT, pos_int, PARENS_RIGHT)),
     bin_type_list: ($) => seq(DOUBLE_COLON, sepBy(DASH, $.bin_type)),
@@ -233,7 +237,8 @@ module.exports = grammar({
         "unsigned",
         "utf16",
         "utf32",
-        "utf8"
+        "utf8",
+        alias($.number, "size")
       ),
 
     boolean: ($) =>
@@ -256,13 +261,32 @@ module.exports = grammar({
         choice(seq($._term, FAT_ARROW), alias($._reverse_atom, $.atom)),
         $._term
       ),
+    sigil: ($) =>
+      token(
+        seq(
+          TILDE,
+          /[a-zA-Z]/,
+          choice(
+            delim(BRACE_LEFT, repeat(/./), BRACE_RIGHT),
+            delim(BRACKET_LEFT, repeat(/./), BRACKET_RIGHT),
+            delim(CHEVRON_LEFT, repeat(/./), CHEVRON_RIGHT),
+            delim(PARENS_LEFT, repeat(/./), PARENS_RIGHT),
+            delim(PIPE, repeat(/./), PIPE),
+            delim(SLASH, repeat(/./), SLASH),
+            delim('"', repeat(/./), '"'),
+            delim("'", repeat(/./), "'"),
+            delim('"""', repeat(choice(/./, /\n/)), '"""'),
+            delim("'''", repeat(choice(/./, /\n/)), "'''"),
+          ),
+          repeat(/[a-zA-Z]/)
+        )
+      ),
     tuple: ($) =>
       seq(
         BRACE_LEFT,
         optional($._trailing_comma_separator_elements),
         BRACE_RIGHT
       ),
-
     variable: ($) =>
       /[_a-z\xC0-\xD6\xD8-\xDE\xDF-\xF6\xF8-\xFF][_a-zA-Z0-9\xC0-\xD6\xD8-\xDE]*/,
     identifier: ($) => /[a-z_]+/,
@@ -278,7 +302,8 @@ module.exports = grammar({
             $.boolean,
             $.list,
             $.tuple,
-            $.map
+            $.map,
+            $.sigil
           )
         ),
         optional(COMMA)
@@ -295,7 +320,8 @@ module.exports = grammar({
         $.tuple,
         $.def,
         $.defp,
-        $.module_attribute
+        $.module_attribute,
+        $.sigil
       ),
     _term: ($) =>
       choice(
@@ -307,7 +333,8 @@ module.exports = grammar({
         $.list,
         $.tuple,
         $.map,
-        $.module_attribute
+        $.module_attribute,
+        $.sigil
       ),
     defmodule: ($) =>
       seq(

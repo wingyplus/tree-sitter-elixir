@@ -1,0 +1,63 @@
+============
+empty
+============
+
+~r<>
+
+---
+
+(source_file (sigil))
+
+============
+string
+============
+
+~s"1234Hello WOrld"
+
+---
+
+(source_file (sigil))
+
+============
+braced
+============
+
+~s{1234Hello WOrld}
+
+---
+
+(source_file (sigil))
+
+============
+multiline
+============
+
+~q"""
+Hello
+
+ This is multi line.
+"""
+
+---
+
+(source_file (sigil))
+
+============
+regex with modifier
+============
+
+~r/[a-z]/fisum
+
+---
+
+(source_file (sigil))
+
+============
+only single char sigil
+============
+
+~error(a-z)
+
+---
+
+(source_file (ERROR (UNEXPECTED 'r')))

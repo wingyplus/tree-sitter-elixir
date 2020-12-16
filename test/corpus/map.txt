@@ -44,5 +44,4 @@ error
 
 ---
 
-(source_file (map (ERROR (number) (number))))
-
+(source_file (map (ERROR (number))))
