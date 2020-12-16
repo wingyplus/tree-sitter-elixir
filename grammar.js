@@ -14,22 +14,20 @@ const decimalDigits = seq(
   repeat(seq(optional("_"), DECIMAL_DIGIT))
 );
 const binaryDigits = seq(
-  "0",
-  "b",
+  "0b",
+
   BINARY_DIGIT,
   optional("_"),
   repeat(seq(optional("_"), BINARY_DIGIT))
 );
 const hexDigits = seq(
-  "0",
-  "x",
+  "0x",
   HEX_DIGIT,
   optional("_"),
   repeat(seq(optional("_"), HEX_DIGIT))
 );
 const octalDigits = seq(
-  "0",
-  "o",
+  "0o",
   OCTAL_DIGIT,
   optional("_"),
   repeat(seq(optional("_"), OCTAL_DIGIT))
@@ -39,6 +37,8 @@ const integer = seq(
   optional("-"),
   choice(decimalDigits, binaryDigits, hexDigits, octalDigits)
 );
+
+const pos_int = choice(decimalDigits, binaryDigits, hexDigits, octalDigits);
 
 const float = seq(
   optional("-"),
@@ -108,6 +108,7 @@ const BRACKET_RIGHT = "]";
 const COLON = ":";
 const DOUBLE_COLON = "::";
 const COMMA = ",";
+const DASH = "-";
 const DOT_OP = ".";
 const DOT_DOT = "..";
 const DOT_DOT_DOT = "...";
@@ -163,6 +164,7 @@ module.exports = grammar({
           $.number,
           $.atom,
           $.string,
+          $.binary_string,
           $.boolean,
           $.list,
           $.tuple,
@@ -188,7 +190,33 @@ module.exports = grammar({
       ),
     uppercase_atom: ($) => seq(/[A-Z]/, repeat(/[0-9a-zA-Z_.]/)),
     string: ($) => token(choice(singleLineString, multiLineString)),
-    boolean: ($) => choice("true", "false"),
+    binary_string: ($) =>
+      seq(BINARY_LEFT, optional(sepBy(COMMA, $.bin_part)), BINARY_RIGHT),
+    bin_part: ($) => seq(choice($.number, $.string), optional($.bin_type_list)),
+    // _bin_sized: ($) =>
+    //   choice(pos_int, seq("size", PARENS_LEFT, pos_int, PARENS_RIGHT)),
+    bin_type_list: ($) => seq(DOUBLE_COLON, sepBy(DASH, $.bin_type)),
+    // TODO: allow size type `<< 10 :: size(32)>>`
+    bin_type: ($) =>
+      choice(
+        "big",
+        "binary",
+        "bits",
+        "bitstring",
+        "bytes",
+        "float",
+        "integer",
+        "little",
+        "native",
+        "signed",
+        "unsigned",
+        "utf16",
+        "utf32",
+        "utf8"
+      ),
+
+    boolean: ($) =>
+      choice("true", "false", ":true", ":false", ":'true'", ":'false'"),
     list: ($) =>
       seq(
         BRACKET_LEFT,
@@ -206,10 +234,19 @@ module.exports = grammar({
     identifier: ($) => /[a-z_]+/,
     _trailing_comma_separator_elements: ($) =>
       seq(
-        commaSeparator(
-          choice($.number, $.atom, $.string, $.boolean, $.list, $.tuple)
+        sepBy(
+          COMMA,
+          choice(
+            $.number,
+            $.atom,
+            $.string,
+            $.binary_string,
+            $.boolean,
+            $.list,
+            $.tuple
+          )
         ),
-        optional(",")
+        optional(COMMA)
       ),
     // TOOO: elaborate to actual expression rule, stub
     expression: ($) =>
@@ -217,6 +254,7 @@ module.exports = grammar({
         $.number,
         $.atom,
         $.string,
+        $.binary_string,
         $.boolean,
         $.list,
         $.tuple,
@@ -246,11 +284,3 @@ module.exports = grammar({
       ),
   },
 });
-
-function separator(rule, sep) {
-  return seq(rule, repeat(seq(sep, rule)));
-}
-
-function commaSeparator(rule) {
-  return separator(rule, ",");
-}

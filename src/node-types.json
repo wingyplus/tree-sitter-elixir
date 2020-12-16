@@ -1,5 +1,63 @@
 [
   {
+    "type": "bin_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bin_type_list",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bin_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "bin_type_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bin_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "binary_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bin_part",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "boolean",
     "named": true,
     "fields": {}
@@ -131,6 +189,10 @@
           "named": true
         },
         {
+          "type": "binary_string",
+          "named": true
+        },
+        {
           "type": "boolean",
           "named": true
         },
@@ -175,6 +237,10 @@
       "types": [
         {
           "type": "atom",
+          "named": true
+        },
+        {
+          "type": "binary_string",
           "named": true
         },
         {
@@ -232,6 +298,10 @@
           "named": true
         },
         {
+          "type": "binary_string",
+          "named": true
+        },
+        {
           "type": "boolean",
           "named": true
         },
@@ -279,6 +349,10 @@
           "named": true
         },
         {
+          "type": "binary_string",
+          "named": true
+        },
+        {
           "type": "boolean",
           "named": true
         },
@@ -323,6 +397,38 @@
     "named": false
   },
   {
+    "type": "-",
+    "named": false
+  },
+  {
+    "type": ":'false'",
+    "named": false
+  },
+  {
+    "type": ":'true'",
+    "named": false
+  },
+  {
+    "type": "::",
+    "named": false
+  },
+  {
+    "type": ":false",
+    "named": false
+  },
+  {
+    "type": ":true",
+    "named": false
+  },
+  {
+    "type": "<<",
+    "named": false
+  },
+  {
+    "type": ">>",
+    "named": false
+  },
+  {
     "type": "@",
     "named": false
   },
@@ -337,6 +443,26 @@
   {
     "type": "atom",
     "named": true
+  },
+  {
+    "type": "big",
+    "named": false
+  },
+  {
+    "type": "binary",
+    "named": false
+  },
+  {
+    "type": "bits",
+    "named": false
+  },
+  {
+    "type": "bitstring",
+    "named": false
+  },
+  {
+    "type": "bytes",
+    "named": false
   },
   {
     "type": "def",
@@ -363,12 +489,32 @@
     "named": false
   },
   {
+    "type": "float",
+    "named": false
+  },
+  {
     "type": "identifier",
     "named": true
   },
   {
+    "type": "integer",
+    "named": false
+  },
+  {
+    "type": "little",
+    "named": false
+  },
+  {
+    "type": "native",
+    "named": false
+  },
+  {
     "type": "number",
     "named": true
+  },
+  {
+    "type": "signed",
+    "named": false
   },
   {
     "type": "string",
@@ -376,6 +522,22 @@
   },
   {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "unsigned",
+    "named": false
+  },
+  {
+    "type": "utf16",
+    "named": false
+  },
+  {
+    "type": "utf32",
+    "named": false
+  },
+  {
+    "type": "utf8",
     "named": false
   },
   {

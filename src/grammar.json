@@ -20,6 +20,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "binary_string"
+          },
+          {
+            "type": "SYMBOL",
             "name": "boolean"
           },
           {
@@ -106,11 +110,7 @@
                     "members": [
                       {
                         "type": "STRING",
-                        "value": "0"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "b"
+                        "value": "0b"
                       },
                       {
                         "type": "PATTERN",
@@ -159,11 +159,7 @@
                     "members": [
                       {
                         "type": "STRING",
-                        "value": "0"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "x"
+                        "value": "0x"
                       },
                       {
                         "type": "PATTERN",
@@ -212,11 +208,7 @@
                     "members": [
                       {
                         "type": "STRING",
-                        "value": "0"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "o"
+                        "value": "0o"
                       },
                       {
                         "type": "PATTERN",
@@ -757,6 +749,177 @@
         ]
       }
     },
+    "binary_string": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<<"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "bin_part"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "bin_part"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ">>"
+        }
+      ]
+    },
+    "bin_part": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "number"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "string"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "bin_type_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "bin_type_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "::"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "bin_type"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "-"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "bin_type"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "bin_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "big"
+        },
+        {
+          "type": "STRING",
+          "value": "binary"
+        },
+        {
+          "type": "STRING",
+          "value": "bits"
+        },
+        {
+          "type": "STRING",
+          "value": "bitstring"
+        },
+        {
+          "type": "STRING",
+          "value": "bytes"
+        },
+        {
+          "type": "STRING",
+          "value": "float"
+        },
+        {
+          "type": "STRING",
+          "value": "integer"
+        },
+        {
+          "type": "STRING",
+          "value": "little"
+        },
+        {
+          "type": "STRING",
+          "value": "native"
+        },
+        {
+          "type": "STRING",
+          "value": "signed"
+        },
+        {
+          "type": "STRING",
+          "value": "unsigned"
+        },
+        {
+          "type": "STRING",
+          "value": "utf16"
+        },
+        {
+          "type": "STRING",
+          "value": "utf32"
+        },
+        {
+          "type": "STRING",
+          "value": "utf8"
+        }
+      ]
+    },
     "boolean": {
       "type": "CHOICE",
       "members": [
@@ -767,6 +930,22 @@
         {
           "type": "STRING",
           "value": "false"
+        },
+        {
+          "type": "STRING",
+          "value": ":true"
+        },
+        {
+          "type": "STRING",
+          "value": ":false"
+        },
+        {
+          "type": "STRING",
+          "value": ":'true'"
+        },
+        {
+          "type": "STRING",
+          "value": ":'false'"
         }
       ]
     },
@@ -851,6 +1030,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "binary_string"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "boolean"
                 },
                 {
@@ -886,6 +1069,10 @@
                       {
                         "type": "SYMBOL",
                         "name": "string"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "binary_string"
                       },
                       {
                         "type": "SYMBOL",
@@ -934,6 +1121,10 @@
         {
           "type": "SYMBOL",
           "name": "string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "binary_string"
         },
         {
           "type": "SYMBOL",
