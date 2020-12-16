@@ -118,6 +118,7 @@ const REV_FAT_ARROW = "<=";
 const HASH = "#";
 const PARENS_LEFT = "(";
 const PARENS_RIGHT = ")";
+const PERCENT = "%";
 const PIPE = "|";
 const DOUBLE_PIPE = "||";
 const QUESTION = "?";
@@ -167,6 +168,7 @@ module.exports = grammar({
           $.binary_string,
           $.boolean,
           $.list,
+          $.map,
           $.tuple,
           $.defmodule,
           $.def,
@@ -186,6 +188,25 @@ module.exports = grammar({
           seq(":", symbolOperators),
           // TODO: unicode support.
           seq(":", choice("'", '"'), repeat(/[0-9a-zA-Z_@]/), choice("'", '"'))
+        )
+      ),
+    // used in maps
+    _reverse_atom: ($) =>
+      token(
+        choice(
+          seq(
+            /[_a-zA-Z]/,
+            repeat(/[0-9a-zA-Z_@]/),
+            optional(choice("?", "!")),
+            COLON
+          ),
+          seq(symbolOperators, COLON),
+          seq(
+            choice("'", '"'),
+            repeat(/[0-9a-zA-Z_@]/),
+            choice("'", '"'),
+            COLON
+          )
         )
       ),
     uppercase_atom: ($) => seq(/[A-Z]/, repeat(/[0-9a-zA-Z_.]/)),
@@ -223,12 +244,25 @@ module.exports = grammar({
         optional($._trailing_comma_separator_elements),
         BRACKET_RIGHT
       ),
+    map: ($) =>
+      seq(
+        PERCENT,
+        BRACE_LEFT,
+        optional(sepBy(COMMA, $.map_entry)),
+        BRACE_RIGHT
+      ),
+    map_entry: ($) =>
+      seq(
+        choice(seq($._term, FAT_ARROW), alias($._reverse_atom, $.atom)),
+        $._term
+      ),
     tuple: ($) =>
       seq(
         BRACE_LEFT,
         optional($._trailing_comma_separator_elements),
         BRACE_RIGHT
       ),
+
     variable: ($) =>
       /[_a-z\xC0-\xD6\xD8-\xDE\xDF-\xF6\xF8-\xFF][_a-zA-Z0-9\xC0-\xD6\xD8-\xDE]*/,
     identifier: ($) => /[a-z_]+/,
@@ -243,7 +277,8 @@ module.exports = grammar({
             $.binary_string,
             $.boolean,
             $.list,
-            $.tuple
+            $.tuple,
+            $.map
           )
         ),
         optional(COMMA)
@@ -260,6 +295,18 @@ module.exports = grammar({
         $.tuple,
         $.def,
         $.defp,
+        $.module_attribute
+      ),
+    _term: ($) =>
+      choice(
+        $.number,
+        $.atom,
+        $.string,
+        $.binary_string,
+        $.boolean,
+        $.list,
+        $.tuple,
+        $.map,
         $.module_attribute
       ),
     defmodule: ($) =>
