@@ -213,6 +213,10 @@
           "named": true
         },
         {
+          "type": "map",
+          "named": true
+        },
+        {
           "type": "module_attribute",
           "named": true
         },
@@ -226,6 +230,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct",
           "named": true
         },
         {
@@ -273,6 +281,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct",
           "named": true
         },
         {
@@ -339,6 +351,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct",
           "named": true
         },
         {
@@ -420,6 +436,91 @@
           "named": true
         },
         {
+          "type": "struct",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct",
+    "named": true,
+    "fields": {
+      "modulename": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "uppercase_atom",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "struct_entry",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct_entry",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "atom",
+          "named": true
+        },
+        {
+          "type": "binary_string",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "module_attribute",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "sigil",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct",
+          "named": true
+        },
+        {
           "type": "tuple",
           "named": true
         }
@@ -464,6 +565,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct",
           "named": true
         },
         {

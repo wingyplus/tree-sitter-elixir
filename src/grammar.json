@@ -32,6 +32,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "struct"
+          },
+          {
+            "type": "SYMBOL",
             "name": "map"
           },
           {
@@ -1366,6 +1370,100 @@
         }
       ]
     },
+    "struct": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "%"
+        },
+        {
+          "type": "FIELD",
+          "name": "modulename",
+          "content": {
+            "type": "SYMBOL",
+            "name": "uppercase_atom"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "struct_entry"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "struct_entry"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "struct_entry": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "atom"
+                },
+                {
+                  "type": "STRING",
+                  "value": "=>"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_reverse_atom"
+              },
+              "named": true,
+              "value": "atom"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_term"
+        }
+      ]
+    },
     "sigil": {
       "type": "TOKEN",
       "content": {
@@ -1684,6 +1782,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "struct"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "map"
                 },
                 {
@@ -1731,6 +1833,10 @@
                       {
                         "type": "SYMBOL",
                         "name": "tuple"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "struct"
                       },
                       {
                         "type": "SYMBOL",
@@ -1794,6 +1900,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "struct"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "map"
+        },
+        {
+          "type": "SYMBOL",
           "name": "def"
         },
         {
@@ -1840,6 +1954,10 @@
         {
           "type": "SYMBOL",
           "name": "tuple"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "struct"
         },
         {
           "type": "SYMBOL",

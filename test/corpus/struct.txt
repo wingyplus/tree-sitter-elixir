@@ -1,0 +1,47 @@
+===========
+empty
+===========
+
+%Test{}
+
+---
+
+(source_file (struct (uppercase_atom)))
+
+
+================================================================================
+with one key and value
+================================================================================
+
+%Test{ :hello => "world" }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct (uppercase_atom)
+    (struct_entry
+        (atom) (string))))
+
+================================================================================
+with many keys and values
+================================================================================
+
+%Test{ hello: :joe, goodbye: "moe" }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct (uppercase_atom)
+    (struct_entry (atom) (atom))
+    (struct_entry (atom) (string))))
+
+
+====================
+error with string key
+====================
+
+%Test{"string" => 2}
+
+---
+
+(source_file (struct (uppercase_atom) (ERROR (string))))

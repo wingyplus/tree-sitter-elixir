@@ -171,6 +171,7 @@ module.exports = grammar({
           $.binary_string,
           $.boolean,
           $.list,
+          $.struct,
           $.map,
           $.sigil,
           $.tuple,
@@ -217,7 +218,8 @@ module.exports = grammar({
     string: ($) => token(choice(singleLineString, multiLineString)),
     binary_string: ($) =>
       seq(BINARY_LEFT, optional(sepBy(COMMA, $.bin_part)), BINARY_RIGHT),
-    bin_part: ($) => seq(choice($.number, $.string, $.variable), optional($.bin_type_list)),
+    bin_part: ($) =>
+      seq(choice($.number, $.string, $.variable), optional($.bin_type_list)),
     // _bin_sized: ($) =>
     //   choice(pos_int, seq("size", PARENS_LEFT, pos_int, PARENS_RIGHT)),
     bin_type_list: ($) => seq(DOUBLE_COLON, sepBy(DASH, $.bin_type)),
@@ -261,6 +263,19 @@ module.exports = grammar({
         choice(seq($._term, FAT_ARROW), alias($._reverse_atom, $.atom)),
         $._term
       ),
+    struct: ($) =>
+      seq(
+        PERCENT,
+        field("modulename", $.uppercase_atom),
+        BRACE_LEFT,
+        optional(sepBy(COMMA, $.struct_entry)),
+        BRACE_RIGHT
+      ),
+    struct_entry: ($) =>
+      seq(
+        choice(seq($.atom, FAT_ARROW), alias($._reverse_atom, $.atom)),
+        $._term
+      ),
     sigil: ($) =>
       token(
         seq(
@@ -276,7 +291,7 @@ module.exports = grammar({
             delim('"', repeat(/./), '"'),
             delim("'", repeat(/./), "'"),
             delim('"""', repeat(choice(/./, /\n/)), '"""'),
-            delim("'''", repeat(choice(/./, /\n/)), "'''"),
+            delim("'''", repeat(choice(/./, /\n/)), "'''")
           ),
           repeat(/[a-zA-Z]/)
         )
@@ -302,6 +317,7 @@ module.exports = grammar({
             $.boolean,
             $.list,
             $.tuple,
+            $.struct,
             $.map,
             $.sigil
           )
@@ -318,6 +334,8 @@ module.exports = grammar({
         $.boolean,
         $.list,
         $.tuple,
+        $.struct,
+        $.map,
         $.def,
         $.defp,
         $.module_attribute,
@@ -332,6 +350,7 @@ module.exports = grammar({
         $.boolean,
         $.list,
         $.tuple,
+        $.struct,
         $.map,
         $.module_attribute,
         $.sigil
