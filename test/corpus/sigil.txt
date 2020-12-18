@@ -1,35 +1,35 @@
 ============
-empty
+Sigil empty
 ============
 
 ~r<>
 
 ---
 
-(source_file (sigil))
+(source_file (expression (sigil)))
 
 ============
-string
+Sigil string
 ============
 
 ~s"1234Hello WOrld"
 
 ---
 
-(source_file (sigil))
+(source_file (expression (sigil)))
 
 ============
-braced
+Sigil braced
 ============
 
 ~s{1234Hello WOrld}
 
 ---
 
-(source_file (sigil))
+(source_file (expression (sigil)))
 
 ============
-multiline
+Sigil multiline
 ============
 
 ~q"""
@@ -40,24 +40,24 @@ Hello
 
 ---
 
-(source_file (sigil))
+(source_file (expression (sigil)))
 
 ============
-regex with modifier
+Sigil regex with modifier
 ============
 
 ~r/[a-z]/fisum
 
 ---
 
-(source_file (sigil))
+(source_file (expression (sigil)))
 
 ============
-only single char sigil
+Sigil accepts only single char
 ============
 
 ~error(a-z)
 
 ---
 
-(source_file (ERROR (UNEXPECTED 'r')))
+(source_file (ERROR (UNEXPECTED 'r') (computed_function_name (expression (variable)) (ERROR))))

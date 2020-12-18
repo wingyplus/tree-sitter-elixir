@@ -1,16 +1,16 @@
 ===========
-empty
+Map empty
 ===========
 
 %{}
 
 ---
 
-(source_file (map))
+(source_file (expression (map)))
 
 
 ================================================================================
-with one key and value
+Map with one key and value
 ================================================================================
 
 %{ :hello => "world" }
@@ -18,12 +18,13 @@ with one key and value
 --------------------------------------------------------------------------------
 
 (source_file
-  (map
-    (map_entry
-        (atom) (string))))
+  (expression
+    (map
+      (map_entry
+          (atom) (string)))))
 
 ================================================================================
-with many keys and values
+Map with many keys and values
 ================================================================================
 
 %{ hello: :joe, goodbye: "moe" }
@@ -31,17 +32,18 @@ with many keys and values
 --------------------------------------------------------------------------------
 
 (source_file
-  (map
-    (map_entry (atom) (atom))
-    (map_entry (atom) (string))))
+  (expression
+    (map
+      (map_entry (atom) (atom))
+      (map_entry (atom) (string)))))
 
 
 ====================
-error
+Map error - missing comma
 ====================
 
 %{1 2}
 
 ---
 
-(source_file (map (ERROR (number))))
+(source_file (expression (map (ERROR (number)))))

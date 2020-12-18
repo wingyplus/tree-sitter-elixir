@@ -11,7 +11,13 @@ Atom - Unquoted
 
 ---
 
-(source_file (atom) (atom) (atom) (atom) (atom) (atom))
+(source_file
+  (expression (atom))
+  (expression (atom))
+  (expression (atom))
+  (expression (atom))
+  (expression (atom))
+  (expression (atom)))
 
 ==============
 Atom - Operator
@@ -24,7 +30,11 @@ Atom - Operator
 
 ---
 
-(source_file (atom) (atom) (atom) (atom))
+(source_file
+  (expression (atom))
+  (expression (atom))
+  (expression (atom))
+  (expression (atom)))
 
 ==============
 Atom - Quoted
@@ -35,4 +45,4 @@ Atom - Quoted
 
 ---
 
-(source_file (atom) (atom))
+(source_file (expression (atom)) (expression (atom)))

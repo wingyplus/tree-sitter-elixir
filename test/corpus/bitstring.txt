@@ -1,15 +1,15 @@
 ================================================================================
-empty
+Bitstring empty
 ================================================================================
 
 <<>>
 
 --------------------------------------------------------------------------------
 
-(source_file (binary_string))
+(source_file (expression (binary_string)))
 
 ================================================================================
-with integer
+Bitstring with integer
 ================================================================================
 
 <<10>>
@@ -17,12 +17,12 @@ with integer
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
-        (number))))
+        (number)))))
 
 ================================================================================
-with integer and type-specifier
+Bitstring with integer and type-specifier
 ================================================================================
 
 <<10 :: integer>>
@@ -30,14 +30,14 @@ with integer and type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
       (number)
       (bin_type_list
-        (bin_type)))))
+        (bin_type))))))
 
 ================================================================================
-with integer and multiple type-specifier
+Bitstring with integer and multiple type-specifier
 ================================================================================
 
 <<10 :: integer-signed-native>>
@@ -45,16 +45,16 @@ with integer and multiple type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
         (bin_type)
-        (bin_type)))))
+        (bin_type))))))
 
 ================================================================================
-with integer and bit-pattern size
+Bitstring with integer and bit-pattern size
 ================================================================================
 
 <<10 :: 2>>
@@ -62,14 +62,14 @@ with integer and bit-pattern size
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
       (number)
       (bin_type_list
-        (bin_type)))))
+        (bin_type))))))
 
 ================================================================================
-with integer and bit-pattern size and type-specifier
+Bitstring with integer and bit-pattern size and type-specifier
 ================================================================================
 
 <<10 :: 2-little>>
@@ -77,15 +77,15 @@ with integer and bit-pattern size and type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
-        (bin_type)))))
+        (bin_type))))))
 
 ================================================================================
-with integer and bit-pattern size and multiple type-specifiers
+Bitstring with integer and bit-pattern size and multiple type-specifiers
 ================================================================================
 
 <<10 :: 2-little-unsigned>>
@@ -93,16 +93,16 @@ with integer and bit-pattern size and multiple type-specifiers
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
         (bin_type)
-        (bin_type)))))
+        (bin_type))))))
 
 ================================================================================
-with float
+Bitstring with float
 ================================================================================
 
 <<10.10>>
@@ -110,12 +110,12 @@ with float
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
         (bin_part
-          (number))))
+          (number)))))
 
 ================================================================================
-with float and type-specifier
+Bitstring with float and type-specifier
 ================================================================================
 
 <<10.10 :: float>>
@@ -123,14 +123,14 @@ with float and type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
       (number)
       (bin_type_list
-        (bin_type)))))
+        (bin_type))))))
 
 ================================================================================
-with float and multiple type-specifier
+Bitstring with float and multiple type-specifier
 ================================================================================
 
 <<10.10 :: float-signed-native>>
@@ -138,16 +138,16 @@ with float and multiple type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
         (bin_type)
-        (bin_type)))))
+        (bin_type))))))
 
 ================================================================================
-with float and bit-pattern size
+Bitstring with float and bit-pattern size
 ================================================================================
 
 <<10.10 :: 32>>
@@ -155,14 +155,14 @@ with float and bit-pattern size
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
       (number)
       (bin_type_list
-        (bin_type)))))
+        (bin_type))))))
 
 ================================================================================
-with float and bit-pattern size and type-specifier
+Bitstring with float and bit-pattern size and type-specifier
 ================================================================================
 
 <<10.10 :: 32-little>>
@@ -170,15 +170,15 @@ with float and bit-pattern size and type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
-        (bin_type)))))
+        (bin_type))))))
 
 ================================================================================
-with float and bit-pattern size and multiple type-specifiers
+Bitstring with float and bit-pattern size and multiple type-specifiers
 ================================================================================
 
 <<10.10 :: 32-little-unsigned>>
@@ -186,16 +186,16 @@ with float and bit-pattern size and multiple type-specifiers
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
         (bin_type)
-        (bin_type)))))
+        (bin_type))))))
 
 ================================================================================
-with string
+Bitstring with string
 ================================================================================
 
 <<"10">>
@@ -203,12 +203,12 @@ with string
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
-      (string))))
+      (string)))))
 
 ================================================================================
-with many components
+Bitstring with many components
 ================================================================================
 
 <<10 :: 8-native, "hello", 10.2 :: unsigned, a :: 8, b :: binary>>
@@ -216,7 +216,7 @@ with many components
 --------------------------------------------------------------------------------
 
 (source_file
-  (binary_string
+  (expression (binary_string
     (bin_part
       (number)
       (bin_type_list
@@ -235,4 +235,4 @@ with many components
     (bin_part
       (variable)
       (bin_type_list
-        (bin_type)))))
+        (bin_type))))))

@@ -1,0 +1,217 @@
+================================================================================
+Function call without args
+================================================================================
+
+lambda()
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression
+    (function_call
+      (computed_function_name
+        (variable)))))
+
+================================================================================
+Function call with args
+================================================================================
+
+lambda(1)
+lambda(1,2,3)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression
+    (function_call
+      (computed_function_name
+        (variable))
+      (expression
+        (number))))
+  (expression
+    (function_call
+      (computed_function_name
+        (variable))
+      (expression
+        (number))
+      (expression
+        (number))
+      (expression
+        (number)))))
+
+================================================================================
+Nested function call
+================================================================================
+
+op(1, lambda(1,2,3))
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression
+    (function_call
+      (computed_function_name
+        (variable))
+      (expression
+        (number))
+      (expression
+        (function_call
+          (computed_function_name
+            (variable))
+          (expression
+            (number))
+          (expression
+            (number))
+          (expression
+            (number)))))))
+
+================================================================================
+Qualified function call without args
+================================================================================
+
+Example.function()
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression
+    (function_call
+      (qualified_function_name
+        (alias)
+        (variable)))))
+
+================================================================================
+Qualified function call with args
+================================================================================
+
+Example.function(1)
+Example.function(1,2,3)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression
+    (function_call
+      (qualified_function_name
+        (alias)
+        (variable))
+      (expression
+        (number))))
+  (expression
+    (function_call
+      (qualified_function_name
+        (alias)
+        (variable))
+      (expression
+        (number))
+      (expression
+        (number))
+      (expression
+        (number)))))
+
+================================================================================
+Nested qualified function calls
+================================================================================
+
+Example.op(1, Example.function(1,2,3))
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression
+    (function_call
+      (qualified_function_name
+        (alias)
+        (variable))
+      (expression
+        (number))
+      (expression
+        (function_call
+          (qualified_function_name
+            (alias)
+            (variable))
+          (expression
+            (number))
+          (expression
+            (number))
+          (expression
+            (number)))))))
+
+
+
+================================================================================
+Local function call with args
+================================================================================
+
+a = local_function(1)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression
+    (match
+      (expression
+        (variable))
+      (expression
+        (function_call
+          (computed_function_name
+            (variable))
+          (expression
+            (number)))))))
+
+================================================================================
+Nested local function calls
+================================================================================
+
+a = local_op(1, local_function(1))
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression
+    (match
+      (expression
+        (variable))
+      (expression
+        (function_call
+          (computed_function_name
+            (variable))
+          (expression
+            (number))
+          (expression
+            (function_call
+              (computed_function_name
+                (variable))
+              (expression
+                (number)))))))))
+
+================================================================================
+Mixed function calls
+================================================================================
+
+Module.function(lambda(1, local_function(1,2,3)))
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression
+    (function_call
+      (qualified_function_name
+        (alias)
+        (variable))
+      (expression
+        (function_call
+          (computed_function_name
+            (variable))
+          (expression
+            (number))
+          (expression
+            (function_call
+              (computed_function_name
+                (variable))
+              (expression
+                (number))
+              (expression
+                (number))
+              (expression
+                (number)))))))))

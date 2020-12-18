@@ -9,12 +9,12 @@ Tuple
 ---
 
 (source_file
-  (tuple)
-  (tuple (number) (number) (number))
-  (tuple
+  (expression (tuple))
+  (expression (tuple (number) (number) (number)))
+  (expression (tuple
     (list (atom))
     (number)
-    (boolean)))
+    (boolean))))
 
 ====================
 Tuple - Error
@@ -24,7 +24,7 @@ Tuple - Error
 
 ---
 
-(source_file (tuple (number) (ERROR)))
+(source_file (expression (tuple (number) (ERROR))))
 
 ====================
 Tuple - Trailing Separator
@@ -34,4 +34,4 @@ Tuple - Trailing Separator
 
 ---
 
-(source_file (tuple (number) (number) (number)))
+(source_file (expression (tuple (number) (number) (number))))

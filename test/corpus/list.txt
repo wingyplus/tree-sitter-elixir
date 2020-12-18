@@ -6,7 +6,7 @@ List - Empty list
 
 ---
 
-(source_file (list))
+(source_file (expression (list)))
 
 ===========
 List With Elements
@@ -22,9 +22,9 @@ List With Elements
 ---
 
 (source_file
-  (list (number) (number) (number))
-  (list (boolean) (string) (number))
-  (list (boolean) (list (number) (number) (number))))
+  (expression (list (number) (number) (number)))
+  (expression (list (boolean) (string) (number)))
+  (expression (list (boolean) (list (number) (number) (number)))))
 
 ===========
 List - Error
@@ -34,7 +34,7 @@ List - Error
 
 ---
 
-(source_file (list (number) (ERROR)))
+(source_file (expression (list (number) (ERROR))))
 
 ====================
 List - Trailing Separator
@@ -44,4 +44,4 @@ List - Trailing Separator
 
 ---
 
-(source_file (list (number) (number) (number)))
+(source_file (expression (list (number) (number) (number))))

@@ -1,5 +1,5 @@
 ============
-zero arity function
+Module function zero arity function
 ============
 
 def test do
@@ -7,10 +7,10 @@ end
 
 ---
 
-(source_file (def (identifier) (do_block)))
+(source_file (expression (def (identifier) (do_block))))
 
 ============
-zero arity function with parens
+Module function zero arity function with parens
 ============
 
 def test() do
@@ -18,10 +18,10 @@ end
 
 ---
 
-(source_file (def (identifier) (do_block)))
+(source_file (expression (def (identifier) (do_block))))
 
 ============
-single arity function
+Module function single arity function
 ============
 
 def test(name) do
@@ -29,10 +29,10 @@ end
 
 ---
 
-(source_file (def (identifier) (variable) (do_block)))
+(source_file (expression (def (identifier) (variable) (do_block))))
 
 ============
-plural arity function
+Module function plural arity function
 ============
 
 def test(first_name, last_name) do
@@ -40,14 +40,14 @@ end
 
 ---
 
-(source_file (def (identifier) (variable) (variable) (do_block)))
+(source_file (expression (def (identifier) (variable) (variable) (do_block))))
 
 ============
-short hand function
+Module function short hand function
 ============
 
 def test(), do: "Hello world"
 
 ---
 
-(source_file (def (identifier) (do_block (expression (string)))))
+(source_file (expression (def (identifier) (do_block (expression (string))))))

@@ -80,6 +80,7 @@ Current status (not mentioned parts are not implemented):
 - [x] Atom - Unquoted
 - [x] Atom - Operator
 - [x] Atom - Quoted
+- [] Atom - Unicode support
 
 ### sigil
 

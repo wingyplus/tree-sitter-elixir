@@ -138,6 +138,28 @@ const multiLineString = seq('"""', repeat(choice(/./, /\n/)), '"""');
 
 ///////////////////////////////////////////////////////////////////////////////
 //
+// Precedences
+//
+///////////////////////////////////////////////////////////////////////////////
+
+// TODO: use correct rule, this is Erlangs
+const PREC = {
+  UNARY_OP: 10,
+  BINARY_OP: 9,
+  MODULE_DECLARATION: 8,
+  FUNCTION_CLAUSE: 7,
+  FUNCTION_NAME: 5,
+  EXPR_MAP_UPDATE: 9,
+  PARENTHESIZED_EXPRESSION: 6,
+  EXPR_LIST_CONS: 5,
+  EXPRESSION: 4,
+  PATTERN: 3,
+  MACRO_APPLICATION: 1,
+  MATCH: -1, // prefer other expressions to matches
+};
+
+///////////////////////////////////////////////////////////////////////////////
+//
 // Combinators
 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -162,36 +184,22 @@ module.exports = grammar({
   name: "elixir",
 
   rules: {
-    source_file: ($) =>
-      repeat(
-        choice(
-          $.number,
-          $.atom,
-          $.string,
-          $.binary_string,
-          $.boolean,
-          $.list,
-          $.struct,
-          $.map,
-          $.sigil,
-          $.tuple,
-          $.defmodule,
-          $.def,
-          $.defp
-        )
-      ),
+    source_file: ($) => repeat(choice($.defmodule, $.expression)),
+
     number: ($) => token(choice(integer, float)),
+
     atom: ($) =>
       token(
         choice(
           seq(
             ":",
-            /[_a-zA-Z]/,
-            repeat(/[0-9a-zA-Z_@]/),
+            /[_a-zA-Z]/u,
+            repeat(/[0-9a-zA-Z_@]/u),
             optional(choice("?", "!"))
           ),
           seq(":", symbolOperators),
-          // TODO: unicode support.
+          // TODO: unicode support, once possible ->
+          // /[@_0-9\p{Letter}\P{Letter}]/u \p{L} matches any Letter in unicode category, requireqs /u flag
           seq(":", choice("'", '"'), repeat(/[0-9a-zA-Z_@]/), choice("'", '"'))
         )
       ),
@@ -214,8 +222,10 @@ module.exports = grammar({
           )
         )
       ),
-    uppercase_atom: ($) => seq(/[A-Z]/, repeat(/[0-9a-zA-Z_.]/)),
+    alias: ($) => seq(/[A-Z]/, repeat(/[0-9a-zA-Z_.]/)),
+
     string: ($) => token(choice(singleLineString, multiLineString)),
+
     binary_string: ($) =>
       seq(BINARY_LEFT, optional(sepBy(COMMA, $.bin_part)), BINARY_RIGHT),
     bin_part: ($) =>
@@ -245,12 +255,14 @@ module.exports = grammar({
 
     boolean: ($) =>
       choice("true", "false", ":true", ":false", ":'true'", ":'false'"),
+
     list: ($) =>
       seq(
         BRACKET_LEFT,
         optional($._trailing_comma_separator_elements),
         BRACKET_RIGHT
       ),
+
     map: ($) =>
       seq(
         PERCENT,
@@ -263,10 +275,11 @@ module.exports = grammar({
         choice(seq($._term, FAT_ARROW), alias($._reverse_atom, $.atom)),
         $._term
       ),
+
     struct: ($) =>
       seq(
         PERCENT,
-        field("modulename", $.uppercase_atom),
+        field("modulename", $.alias),
         BRACE_LEFT,
         optional(sepBy(COMMA, $.struct_entry)),
         BRACE_RIGHT
@@ -276,6 +289,7 @@ module.exports = grammar({
         choice(seq($.atom, FAT_ARROW), alias($._reverse_atom, $.atom)),
         $._term
       ),
+
     sigil: ($) =>
       token(
         seq(
@@ -296,15 +310,18 @@ module.exports = grammar({
           repeat(/[a-zA-Z]/)
         )
       ),
+
     tuple: ($) =>
       seq(
         BRACE_LEFT,
         optional($._trailing_comma_separator_elements),
         BRACE_RIGHT
       ),
+
     variable: ($) =>
       /[_a-z\xC0-\xD6\xD8-\xDE\xDF-\xF6\xF8-\xFF][_a-zA-Z0-9\xC0-\xD6\xD8-\xDE]*/,
     identifier: ($) => /[a-z_]+/,
+
     _trailing_comma_separator_elements: ($) =>
       seq(
         sepBy(
@@ -324,6 +341,7 @@ module.exports = grammar({
         ),
         optional(COMMA)
       ),
+
     // TOOO: elaborate to actual expression rule, stub
     expression: ($) =>
       choice(
@@ -339,7 +357,10 @@ module.exports = grammar({
         $.def,
         $.defp,
         $.module_attribute,
-        $.sigil
+        $.sigil,
+        $.function_call,
+        $.match,
+        $.variable
       ),
     _term: ($) =>
       choice(
@@ -355,13 +376,15 @@ module.exports = grammar({
         $.module_attribute,
         $.sigil
       ),
+
     defmodule: ($) =>
       seq(
         "defmodule",
-        field("modulename", choice($.uppercase_atom, $.atom)),
+        field("modulename", choice($.alias, $.atom)),
         $.do_block
       ),
     module_attribute: ($) => seq(AT_OP, $.identifier, $.expression),
+
     def: ($) =>
       seq(
         "def",
@@ -374,6 +397,28 @@ module.exports = grammar({
       choice(
         seq("do", optional($.expression), "end"),
         seq(", do:", $.expression)
+      ),
+
+    match: ($) =>
+      prec.right(PREC.MATCH, seq($.expression, EQUAL, $.expression)),
+
+    function_call: ($) =>
+      seq(field("name", $._function_name), args($.expression)),
+    _function_name: ($) =>
+      prec(
+        PREC.FUNCTION_NAME,
+        choice($.computed_function_name, $.qualified_function_name)
+      ),
+    qualified_function_name: ($) =>
+      seq(
+        field("module_name", choice($.alias, $.atom, parens($.expression))),
+        DOT_OP,
+        field("function_name", choice($.variable, $.atom, parens($.expression)))
+      ),
+    computed_function_name: ($) =>
+      prec(
+        PREC.FUNCTION_NAME,
+        choice($.variable, $.atom, parens($.expression))
       ),
   },
 });

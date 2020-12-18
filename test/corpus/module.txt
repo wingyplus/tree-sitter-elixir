@@ -18,4 +18,4 @@ end
 
 ---
 
-(source_file (defmodule (uppercase_atom) (do_block)))
+(source_file (defmodule (alias) (do_block)))
