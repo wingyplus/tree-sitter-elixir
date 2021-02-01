@@ -132,11 +132,10 @@ Current status (not mentioned parts are not implemented):
 - pipe operator (and other operators probably)
 - list cons ([head | tail])
 - magic vars ( **Conts** )
-- comments
+- comments & doctest (# iex> ... )
 - string interpolation
 - flow control (case, if, with)
-- default arguments & function heads without body
+- default arguments & function heads without body; def a(b, c \\ [])
 - records?
 - matching
 - for / list comprehensions
-- doctest (# iex> ... )
