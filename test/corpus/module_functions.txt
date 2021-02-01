@@ -7,7 +7,7 @@ end
 
 ---
 
-(source_file (expression (def (identifier) (do_block))))
+(source_file (def (identifier) (do_block)))
 
 ============
 Module function zero arity function with parens
@@ -18,7 +18,7 @@ end
 
 ---
 
-(source_file (expression (def (identifier) (do_block))))
+(source_file (def (identifier) (do_block)))
 
 ============
 Module function single arity function
@@ -29,7 +29,7 @@ end
 
 ---
 
-(source_file (expression (def (identifier) (variable) (do_block))))
+(source_file (def (identifier) (variable) (do_block)))
 
 ============
 Module function plural arity function
@@ -40,7 +40,7 @@ end
 
 ---
 
-(source_file (expression (def (identifier) (variable) (variable) (do_block))))
+(source_file (def (identifier) (variable) (variable) (do_block)))
 
 ============
 Module function short hand function
@@ -50,4 +50,4 @@ def test(), do: "Hello world"
 
 ---
 
-(source_file (expression (def (identifier) (do_block (expression (string))))))
+(source_file (def (identifier) (do_block (string))))

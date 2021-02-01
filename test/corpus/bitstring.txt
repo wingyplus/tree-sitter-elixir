@@ -6,7 +6,7 @@ Bitstring empty
 
 --------------------------------------------------------------------------------
 
-(source_file (expression (binary_string)))
+(source_file (binary_string))
 
 ================================================================================
 Bitstring with integer
@@ -17,9 +17,9 @@ Bitstring with integer
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
-        (number)))))
+      (number))))
 
 ================================================================================
 Bitstring with integer and type-specifier
@@ -30,11 +30,11 @@ Bitstring with integer and type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
       (number)
       (bin_type_list
-        (bin_type))))))
+        (bin_type)))))
 
 ================================================================================
 Bitstring with integer and multiple type-specifier
@@ -45,13 +45,13 @@ Bitstring with integer and multiple type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
         (bin_type)
-        (bin_type))))))
+        (bin_type)))))
 
 ================================================================================
 Bitstring with integer and bit-pattern size
@@ -62,11 +62,11 @@ Bitstring with integer and bit-pattern size
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
       (number)
       (bin_type_list
-        (bin_type))))))
+        (bin_type)))))
 
 ================================================================================
 Bitstring with integer and bit-pattern size and type-specifier
@@ -77,12 +77,12 @@ Bitstring with integer and bit-pattern size and type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
-        (bin_type))))))
+        (bin_type)))))
 
 ================================================================================
 Bitstring with integer and bit-pattern size and multiple type-specifiers
@@ -93,13 +93,13 @@ Bitstring with integer and bit-pattern size and multiple type-specifiers
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
         (bin_type)
-        (bin_type))))))
+        (bin_type)))))
 
 ================================================================================
 Bitstring with float
@@ -110,9 +110,9 @@ Bitstring with float
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
         (bin_part
-          (number)))))
+          (number))))
 
 ================================================================================
 Bitstring with float and type-specifier
@@ -123,11 +123,11 @@ Bitstring with float and type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
       (number)
       (bin_type_list
-        (bin_type))))))
+        (bin_type)))))
 
 ================================================================================
 Bitstring with float and multiple type-specifier
@@ -138,13 +138,13 @@ Bitstring with float and multiple type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
         (bin_type)
-        (bin_type))))))
+        (bin_type)))))
 
 ================================================================================
 Bitstring with float and bit-pattern size
@@ -155,11 +155,11 @@ Bitstring with float and bit-pattern size
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
       (number)
       (bin_type_list
-        (bin_type))))))
+        (bin_type)))))
 
 ================================================================================
 Bitstring with float and bit-pattern size and type-specifier
@@ -170,12 +170,12 @@ Bitstring with float and bit-pattern size and type-specifier
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
-        (bin_type))))))
+        (bin_type)))))
 
 ================================================================================
 Bitstring with float and bit-pattern size and multiple type-specifiers
@@ -186,13 +186,13 @@ Bitstring with float and bit-pattern size and multiple type-specifiers
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
       (number)
       (bin_type_list
         (bin_type)
         (bin_type)
-        (bin_type))))))
+        (bin_type)))))
 
 ================================================================================
 Bitstring with string
@@ -203,9 +203,9 @@ Bitstring with string
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
-      (string)))))
+      (string))))
 
 ================================================================================
 Bitstring with many components
@@ -216,7 +216,7 @@ Bitstring with many components
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (binary_string
+  (binary_string
     (bin_part
       (number)
       (bin_type_list
@@ -235,4 +235,4 @@ Bitstring with many components
     (bin_part
       (variable)
       (bin_type_list
-        (bin_type))))))
+        (bin_type)))))

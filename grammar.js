@@ -183,8 +183,14 @@ const oneOf = (x) => choice.apply(null, x);
 module.exports = grammar({
   name: "elixir",
 
+  // TODO: figure out why this wreaks havoc
+  // word: ($) => $.identifier,
+  // extras: ($) => [/[\x00-\x20\x80-\xA0]/, $.comment],
+
   rules: {
-    source_file: ($) => repeat(choice($.defmodule, $.expression)),
+    source_file: ($) => repeat(choice($.defmodule, $._expression)),
+
+    comment: ($) => /#.*\n/,
 
     number: ($) => token(choice(integer, float)),
 
@@ -263,6 +269,19 @@ module.exports = grammar({
         BRACKET_RIGHT
       ),
 
+    _expr_list: ($) =>
+      prec(PREC.EXPR_LIST_CONS, choice(list($._expression), $.list_cons)),
+
+    list_cons: ($) =>
+      delim(
+        BRACKET_LEFT,
+        seq(
+          field("head", sepBy(COMMA, $._expression)),
+          PIPE,
+          field("tail", $._expression)
+        ),
+        BRACKET_RIGHT
+      ),
     map: ($) =>
       seq(
         PERCENT,
@@ -336,14 +355,16 @@ module.exports = grammar({
             $.tuple,
             $.struct,
             $.map,
-            $.sigil
+            $.sigil,
+            $.alias,
+            $.variable
           )
         ),
         optional(COMMA)
       ),
 
     // TOOO: elaborate to actual expression rule, stub
-    expression: ($) =>
+    _expression: ($) =>
       choice(
         $.number,
         $.atom,
@@ -361,6 +382,7 @@ module.exports = grammar({
         $.function_call,
         $.match,
         $.variable
+        // $.alias, TODO: this breaks function calls etc
       ),
     _term: ($) =>
       choice(
@@ -374,7 +396,10 @@ module.exports = grammar({
         $.struct,
         $.map,
         $.module_attribute,
-        $.sigil
+        $.sigil,
+        $.function_call,
+        $.match,
+        $.variable
       ),
 
     defmodule: ($) =>
@@ -383,7 +408,7 @@ module.exports = grammar({
         field("modulename", choice($.alias, $.atom)),
         $.do_block
       ),
-    module_attribute: ($) => seq(AT_OP, $.identifier, $.expression),
+    module_attribute: ($) => seq(AT_OP, $.identifier, $._expression),
 
     def: ($) =>
       seq(
@@ -395,15 +420,15 @@ module.exports = grammar({
     defp: ($) => seq("defp", choice($.atom, $.identifier), $.do_block),
     do_block: ($) =>
       choice(
-        seq("do", optional($.expression), "end"),
-        seq(", do:", $.expression)
+        seq("do", optional($._expression), "end"),
+        seq(", do:", $._expression)
       ),
 
     match: ($) =>
-      prec.right(PREC.MATCH, seq($.expression, EQUAL, $.expression)),
+      prec.right(PREC.MATCH, seq($._expression, EQUAL, $._expression)),
 
     function_call: ($) =>
-      seq(field("name", $._function_name), args($.expression)),
+      seq(field("name", $._function_name), args($._expression)),
     _function_name: ($) =>
       prec(
         PREC.FUNCTION_NAME,
@@ -411,14 +436,17 @@ module.exports = grammar({
       ),
     qualified_function_name: ($) =>
       seq(
-        field("module_name", choice($.alias, $.atom, parens($.expression))),
+        field("module_name", choice($.alias, $.atom, parens($._expression))),
         DOT_OP,
-        field("function_name", choice($.variable, $.atom, parens($.expression)))
+        field(
+          "function_name",
+          choice($.variable, $.atom, parens($._expression))
+        )
       ),
     computed_function_name: ($) =>
       prec(
         PREC.FUNCTION_NAME,
-        choice($.variable, $.atom, parens($.expression))
+        choice($.variable, $.atom, parens($._expression))
       ),
   },
 });

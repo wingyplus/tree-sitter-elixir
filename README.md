@@ -121,3 +121,22 @@ Current status (not mentioned parts are not implemented):
 - [x] Tuple
 - [x] Tuple - Error
 - [x] Tuple - Trailing Separator
+
+## TODO
+
+- use, import, require and other macro/function calls in module body
+- keyword lists
+- function capture (&Enum.map)
+- anonymous functions (fn -> end )
+- map update (shorthand version %{ old | key: new})
+- pipe operator (and other operators probably)
+- list cons ([head | tail])
+- magic vars ( **Conts** )
+- comments
+- string interpolation
+- flow control (case, if, with)
+- default arguments & function heads without body
+- records?
+- matching
+- for / list comprehensions
+- doctest (# iex> ... )

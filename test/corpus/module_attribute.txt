@@ -8,11 +8,12 @@ end
 
 (source_file
   (defmodule (atom)
-    (do_block (expression
+    (do_block
       (module_attribute (identifier)
-        (expression (string))
-      ))
-    ))
+        (string)
+      )
+    )
+  )
 )
 
 

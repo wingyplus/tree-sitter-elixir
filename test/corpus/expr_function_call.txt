@@ -7,10 +7,9 @@ lambda()
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression
-    (function_call
-      (computed_function_name
-        (variable)))))
+  (function_call
+    (computed_function_name
+      (variable))))
 
 ================================================================================
 Function call with args
@@ -22,22 +21,16 @@ lambda(1,2,3)
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression
-    (function_call
-      (computed_function_name
-        (variable))
-      (expression
-        (number))))
-  (expression
-    (function_call
-      (computed_function_name
-        (variable))
-      (expression
-        (number))
-      (expression
-        (number))
-      (expression
-        (number)))))
+  (function_call
+    (computed_function_name
+      (variable))
+      (number))
+  (function_call
+    (computed_function_name
+      (variable))
+      (number)
+      (number)
+      (number)))
 
 ================================================================================
 Nested function call
@@ -48,22 +41,16 @@ op(1, lambda(1,2,3))
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression
     (function_call
       (computed_function_name
         (variable))
-      (expression
-        (number))
-      (expression
+        (number)
         (function_call
           (computed_function_name
             (variable))
-          (expression
-            (number))
-          (expression
-            (number))
-          (expression
-            (number)))))))
+            (number)
+            (number)
+            (number))))
 
 ================================================================================
 Qualified function call without args
@@ -74,11 +61,10 @@ Example.function()
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression
     (function_call
       (qualified_function_name
         (alias)
-        (variable)))))
+        (variable))))
 
 ================================================================================
 Qualified function call with args
@@ -90,24 +76,18 @@ Example.function(1,2,3)
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression
     (function_call
       (qualified_function_name
         (alias)
         (variable))
-      (expression
-        (number))))
-  (expression
+        (number))
     (function_call
       (qualified_function_name
         (alias)
         (variable))
-      (expression
-        (number))
-      (expression
-        (number))
-      (expression
-        (number)))))
+        (number)
+        (number)
+        (number)))
 
 ================================================================================
 Nested qualified function calls
@@ -118,24 +98,18 @@ Example.op(1, Example.function(1,2,3))
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression
     (function_call
       (qualified_function_name
         (alias)
         (variable))
-      (expression
-        (number))
-      (expression
+        (number)
         (function_call
           (qualified_function_name
             (alias)
             (variable))
-          (expression
-            (number))
-          (expression
-            (number))
-          (expression
-            (number)))))))
+            (number)
+            (number)
+            (number))))
 
 
 
@@ -148,16 +122,12 @@ a = local_function(1)
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression
     (match
-      (expression
-        (variable))
-      (expression
+        (variable)
         (function_call
           (computed_function_name
             (variable))
-          (expression
-            (number)))))))
+            (number))))
 
 ================================================================================
 Nested local function calls
@@ -168,22 +138,16 @@ a = local_op(1, local_function(1))
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression
-    (match
-      (expression
+  (match
+    (variable)
+    (function_call
+      (computed_function_name
         (variable))
-      (expression
+        (number)
         (function_call
           (computed_function_name
             (variable))
-          (expression
-            (number))
-          (expression
-            (function_call
-              (computed_function_name
-                (variable))
-              (expression
-                (number)))))))))
+            (number)))))
 
 ================================================================================
 Mixed function calls
@@ -194,24 +158,17 @@ Module.function(lambda(1, local_function(1,2,3)))
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression
-    (function_call
-      (qualified_function_name
-        (alias)
-        (variable))
-      (expression
-        (function_call
-          (computed_function_name
-            (variable))
-          (expression
-            (number))
-          (expression
-            (function_call
-              (computed_function_name
-                (variable))
-              (expression
-                (number))
-              (expression
-                (number))
-              (expression
-                (number)))))))))
+  (function_call
+    (qualified_function_name
+      (alias)
+      (variable))
+      (function_call
+        (computed_function_name
+          (variable))
+          (number)
+          (function_call
+            (computed_function_name
+              (variable))
+              (number)
+              (number)
+              (number)))))

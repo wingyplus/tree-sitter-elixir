@@ -6,7 +6,7 @@ String
 
 ---
 
-(source_file (expression (string)))
+(source_file (string))
 
 ============
 String Multi Line
@@ -20,4 +20,4 @@ Hello
 
 ---
 
-(source_file (expression (string)))
+(source_file (string))

@@ -6,7 +6,7 @@ Sigil empty
 
 ---
 
-(source_file (expression (sigil)))
+(source_file (sigil))
 
 ============
 Sigil string
@@ -16,7 +16,7 @@ Sigil string
 
 ---
 
-(source_file (expression (sigil)))
+(source_file (sigil))
 
 ============
 Sigil braced
@@ -26,7 +26,7 @@ Sigil braced
 
 ---
 
-(source_file (expression (sigil)))
+(source_file (sigil))
 
 ============
 Sigil multiline
@@ -40,7 +40,7 @@ Hello
 
 ---
 
-(source_file (expression (sigil)))
+(source_file (sigil))
 
 ============
 Sigil regex with modifier
@@ -50,7 +50,7 @@ Sigil regex with modifier
 
 ---
 
-(source_file (expression (sigil)))
+(source_file (sigil))
 
 ============
 Sigil accepts only single char
@@ -60,4 +60,4 @@ Sigil accepts only single char
 
 ---
 
-(source_file (ERROR (UNEXPECTED 'r') (computed_function_name (expression (variable)) (ERROR))))
+(source_file (ERROR (UNEXPECTED 'r') (computed_function_name (variable) (ERROR))))

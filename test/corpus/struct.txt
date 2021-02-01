@@ -6,7 +6,7 @@ empty
 
 ---
 
-(source_file (expression (struct (alias))))
+(source_file (struct (alias)))
 
 
 ================================================================================
@@ -18,9 +18,9 @@ with one key and value
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (struct (alias)
+  (struct (alias)
     (struct_entry
-        (atom) (string)))))
+        (atom) (string))))
 
 ================================================================================
 with many keys and values
@@ -31,9 +31,9 @@ with many keys and values
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression (struct (alias)
+  (struct (alias)
     (struct_entry (atom) (atom))
-    (struct_entry (atom) (string)))))
+    (struct_entry (atom) (string))))
 
 
 ====================
@@ -44,4 +44,4 @@ error with string key
 
 ---
 
-(source_file (expression (struct (alias) (ERROR (string)))))
+(source_file (struct (alias) (ERROR (string))))
