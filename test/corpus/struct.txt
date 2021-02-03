@@ -1,5 +1,5 @@
 ===========
-empty
+Struct empty
 ===========
 
 %Test{}
@@ -10,7 +10,7 @@ empty
 
 
 ================================================================================
-with one key and value
+Struct with one key and value
 ================================================================================
 
 %Test{ :hello => "world" }
@@ -23,7 +23,7 @@ with one key and value
         (atom) (string))))
 
 ================================================================================
-with many keys and values
+Struct with many keys and values
 ================================================================================
 
 %Test{ hello: :joe, goodbye: "moe" }
@@ -37,11 +37,11 @@ with many keys and values
 
 
 ====================
-error with string key
+Struct error with string key
 ====================
 
 %Test{"string" => 2}
 
 ---
 
-(source_file (struct (alias) (ERROR (string))))
+(source_file (struct (alias) (MISSING "}")) (expr_op (string) (ERROR) (number)) (ERROR))

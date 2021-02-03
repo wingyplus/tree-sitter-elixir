@@ -2027,6 +2027,10 @@
         {
           "type": "SYMBOL",
           "name": "variable"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expr_op"
         }
       ]
     },
@@ -2527,6 +2531,258 @@
           }
         ]
       }
+    },
+    "expr_op": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_expr_operator_unary"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expr_operator_binary"
+        }
+      ]
+    },
+    "_expr_operator_unary": {
+      "type": "PREC_RIGHT",
+      "value": 10,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "+"
+                },
+                {
+                  "type": "STRING",
+                  "value": "-"
+                },
+                {
+                  "type": "STRING",
+                  "value": "!"
+                },
+                {
+                  "type": "STRING",
+                  "value": "not"
+                },
+                {
+                  "type": "STRING",
+                  "value": "bnot"
+                }
+              ]
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "operand",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          }
+        ]
+      }
+    },
+    "_expr_operator_binary": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PREC_LEFT",
+          "value": 9,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "lhs",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "operator",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "*"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "+"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "-"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "/"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "&"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "|"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "!="
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "<"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "=<"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "=="
+                    },
+                    {
+                      "type": "STRING",
+                      "value": ">"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": ">="
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "and"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "band"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "&&&"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "bor"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "|||"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "bsl"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "<<<"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "bsr"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": ">>>"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "bxor"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "^^^"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "or"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "..."
+                    },
+                    {
+                      "type": "STRING",
+                      "value": ".."
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "|>"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "rhs",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC_RIGHT",
+          "value": 9,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "lhs",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "operator",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "=~"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "++"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "--"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "rhs",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                }
+              }
+            ]
+          }
+        }
+      ]
     }
   },
   "extras": [

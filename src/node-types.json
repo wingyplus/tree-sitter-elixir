@@ -100,6 +100,10 @@
           "named": true
         },
         {
+          "type": "expr_op",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -278,6 +282,10 @@
           "named": true
         },
         {
+          "type": "expr_op",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -325,6 +333,372 @@
     }
   },
   {
+    "type": "expr_op",
+    "named": true,
+    "fields": {
+      "lhs": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "atom",
+            "named": true
+          },
+          {
+            "type": "binary_string",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "def",
+            "named": true
+          },
+          {
+            "type": "defp",
+            "named": true
+          },
+          {
+            "type": "expr_op",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "match",
+            "named": true
+          },
+          {
+            "type": "module_attribute",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "sigil",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "operand": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "atom",
+            "named": true
+          },
+          {
+            "type": "binary_string",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "def",
+            "named": true
+          },
+          {
+            "type": "defp",
+            "named": true
+          },
+          {
+            "type": "expr_op",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "match",
+            "named": true
+          },
+          {
+            "type": "module_attribute",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "sigil",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "!",
+            "named": false
+          },
+          {
+            "type": "!=",
+            "named": false
+          },
+          {
+            "type": "&",
+            "named": false
+          },
+          {
+            "type": "&&&",
+            "named": false
+          },
+          {
+            "type": "*",
+            "named": false
+          },
+          {
+            "type": "+",
+            "named": false
+          },
+          {
+            "type": "++",
+            "named": false
+          },
+          {
+            "type": "-",
+            "named": false
+          },
+          {
+            "type": "--",
+            "named": false
+          },
+          {
+            "type": "..",
+            "named": false
+          },
+          {
+            "type": "...",
+            "named": false
+          },
+          {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "<",
+            "named": false
+          },
+          {
+            "type": "<<<",
+            "named": false
+          },
+          {
+            "type": "=<",
+            "named": false
+          },
+          {
+            "type": "==",
+            "named": false
+          },
+          {
+            "type": "=~",
+            "named": false
+          },
+          {
+            "type": ">",
+            "named": false
+          },
+          {
+            "type": ">=",
+            "named": false
+          },
+          {
+            "type": ">>>",
+            "named": false
+          },
+          {
+            "type": "^^^",
+            "named": false
+          },
+          {
+            "type": "and",
+            "named": false
+          },
+          {
+            "type": "band",
+            "named": false
+          },
+          {
+            "type": "bnot",
+            "named": false
+          },
+          {
+            "type": "bor",
+            "named": false
+          },
+          {
+            "type": "bsl",
+            "named": false
+          },
+          {
+            "type": "bsr",
+            "named": false
+          },
+          {
+            "type": "bxor",
+            "named": false
+          },
+          {
+            "type": "not",
+            "named": false
+          },
+          {
+            "type": "or",
+            "named": false
+          },
+          {
+            "type": "|",
+            "named": false
+          },
+          {
+            "type": "|>",
+            "named": false
+          },
+          {
+            "type": "|||",
+            "named": false
+          }
+        ]
+      },
+      "rhs": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "atom",
+            "named": true
+          },
+          {
+            "type": "binary_string",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "def",
+            "named": true
+          },
+          {
+            "type": "defp",
+            "named": true
+          },
+          {
+            "type": "expr_op",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "match",
+            "named": true
+          },
+          {
+            "type": "module_attribute",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "sigil",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "function_call",
     "named": true,
     "fields": {
@@ -362,6 +736,10 @@
           },
           {
             "type": "defp",
+            "named": true
+          },
+          {
+            "type": "expr_op",
             "named": true
           },
           {
@@ -452,6 +830,10 @@
         },
         {
           "type": "defp",
+          "named": true
+        },
+        {
+          "type": "expr_op",
           "named": true
         },
         {
@@ -593,6 +975,10 @@
             "named": true
           },
           {
+            "type": "expr_op",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -660,6 +1046,10 @@
           },
           {
             "type": "defp",
+            "named": true
+          },
+          {
+            "type": "expr_op",
             "named": true
           },
           {
@@ -821,6 +1211,10 @@
           "named": true
         },
         {
+          "type": "expr_op",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -893,6 +1287,10 @@
         },
         {
           "type": "defp",
+          "named": true
+        },
+        {
+          "type": "expr_op",
           "named": true
         },
         {
@@ -983,6 +1381,10 @@
             "named": true
           },
           {
+            "type": "expr_op",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -1065,6 +1467,10 @@
             "named": true
           },
           {
+            "type": "expr_op",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -1142,6 +1548,10 @@
         },
         {
           "type": "defp",
+          "named": true
+        },
+        {
+          "type": "expr_op",
           "named": true
         },
         {
@@ -1344,7 +1754,23 @@
     }
   },
   {
+    "type": "!",
+    "named": false
+  },
+  {
+    "type": "!=",
+    "named": false
+  },
+  {
     "type": "%",
+    "named": false
+  },
+  {
+    "type": "&",
+    "named": false
+  },
+  {
+    "type": "&&&",
     "named": false
   },
   {
@@ -1353,6 +1779,18 @@
   },
   {
     "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
+    "type": "++",
     "named": false
   },
   {
@@ -1368,7 +1806,23 @@
     "named": false
   },
   {
+    "type": "--",
+    "named": false
+  },
+  {
     "type": ".",
+    "named": false
+  },
+  {
+    "type": "..",
+    "named": false
+  },
+  {
+    "type": "...",
+    "named": false
+  },
+  {
+    "type": "/",
     "named": false
   },
   {
@@ -1392,7 +1846,15 @@
     "named": false
   },
   {
+    "type": "<",
+    "named": false
+  },
+  {
     "type": "<<",
+    "named": false
+  },
+  {
+    "type": "<<<",
     "named": false
   },
   {
@@ -1400,11 +1862,35 @@
     "named": false
   },
   {
+    "type": "=<",
+    "named": false
+  },
+  {
+    "type": "==",
+    "named": false
+  },
+  {
     "type": "=>",
     "named": false
   },
   {
+    "type": "=~",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": ">=",
+    "named": false
+  },
+  {
     "type": ">>",
+    "named": false
+  },
+  {
+    "type": ">>>",
     "named": false
   },
   {
@@ -1420,8 +1906,20 @@
     "named": false
   },
   {
+    "type": "^^^",
+    "named": false
+  },
+  {
+    "type": "and",
+    "named": false
+  },
+  {
     "type": "atom",
     "named": true
+  },
+  {
+    "type": "band",
+    "named": false
   },
   {
     "type": "big",
@@ -1437,6 +1935,26 @@
   },
   {
     "type": "bitstring",
+    "named": false
+  },
+  {
+    "type": "bnot",
+    "named": false
+  },
+  {
+    "type": "bor",
+    "named": false
+  },
+  {
+    "type": "bsl",
+    "named": false
+  },
+  {
+    "type": "bsr",
+    "named": false
+  },
+  {
+    "type": "bxor",
     "named": false
   },
   {
@@ -1488,8 +2006,16 @@
     "named": false
   },
   {
+    "type": "not",
+    "named": false
+  },
+  {
     "type": "number",
     "named": true
+  },
+  {
+    "type": "or",
+    "named": false
   },
   {
     "type": "sigil",
@@ -1541,6 +2067,14 @@
   },
   {
     "type": "|",
+    "named": false
+  },
+  {
+    "type": "|>",
+    "named": false
+  },
+  {
+    "type": "|||",
     "named": false
   },
   {

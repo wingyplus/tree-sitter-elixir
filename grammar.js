@@ -96,6 +96,38 @@ const symbolOperators = choice(
   "\\\\" // "\\"
 );
 
+const OP1 = ["+", "-", "!", "not", "bnot"];
+const OP2_LEFT_ASSOC = [
+  "*",
+  "+",
+  "-",
+  "/",
+  "&",
+  "|",
+  "!=",
+  "<",
+  "=<",
+  "==",
+  ">",
+  ">=",
+  "and",
+  "band",
+  "&&&",
+  "bor",
+  "|||",
+  "bsl",
+  "<<<",
+  "bsr",
+  ">>>",
+  "bxor",
+  "^^^",
+  "or",
+  "...",
+  "..",
+  "|>"
+];
+const OP2_RIGHT_ASSOC = ["=~", "++", "--"];
+
 const ARROW = "->";
 const AT_OP = "@";
 const IN_OP = "<-";
@@ -381,7 +413,8 @@ module.exports = grammar({
         $.sigil,
         $.function_call,
         $.match,
-        $.variable
+        $.variable,
+        $.expr_op
         // $.alias, TODO: this breaks function calls etc
       ),
     _term: ($) =>
@@ -449,6 +482,34 @@ module.exports = grammar({
       prec(
         PREC.FUNCTION_NAME,
         choice($.variable, $.atom, parens($._expression))
+      ),
+
+    expr_op: ($) => choice($._expr_operator_unary, $._expr_operator_binary),
+
+    _expr_operator_unary: ($) =>
+      prec.right(
+        PREC.UNARY_OP,
+        seq(field("operator", oneOf(OP1)), field("operand", $._expression))
+      ),
+
+    _expr_operator_binary: ($) =>
+      choice(
+        prec.left(
+          PREC.BINARY_OP,
+          seq(
+            field("lhs", $._expression),
+            field("operator", oneOf(OP2_LEFT_ASSOC)),
+            field("rhs", $._expression)
+          )
+        ),
+        prec.right(
+          PREC.BINARY_OP,
+          seq(
+            field("lhs", $._expression),
+            field("operator", oneOf(OP2_RIGHT_ASSOC)),
+            field("rhs", $._expression)
+          )
+        )
       ),
   },
 });

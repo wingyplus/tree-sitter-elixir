@@ -60,4 +60,4 @@ Sigil accepts only single char
 
 ---
 
-(source_file (ERROR (UNEXPECTED 'r') (computed_function_name (variable) (ERROR))))
+(source_file (ERROR (UNEXPECTED 'r') (computed_function_name (expr_op (variable) (variable)))))
