@@ -51,3 +51,15 @@ def test(), do: "Hello world"
 ---
 
 (source_file (def (identifier) (do_block (string))))
+
+============
+Module function with guard clause
+============
+
+def test(first_name, last_name) when is_nil(first_name) do
+  "#{first_name} #{last_name}"
+end
+
+---
+
+(source_file (def (identifier) (variable) (variable) (guard_clause (function_call (computed_function_name (variable)) (variable))) (do_block (string))))

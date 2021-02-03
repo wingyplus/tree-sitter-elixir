@@ -415,6 +415,7 @@ module.exports = grammar({
         "def",
         choice($.atom, $.identifier),
         optional(args($.variable)),
+        optional($.guard_clause),
         $.do_block
       ),
     defp: ($) => seq("defp", choice($.atom, $.identifier), $.do_block),
@@ -423,6 +424,7 @@ module.exports = grammar({
         seq("do", optional($._expression), "end"),
         seq(", do:", $._expression)
       ),
+    guard_clause: $ => seq("when", $._expression),
 
     match: ($) =>
       prec.right(PREC.MATCH, seq($._expression, EQUAL, $._expression)),
