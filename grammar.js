@@ -124,7 +124,7 @@ const OP2_LEFT_ASSOC = [
   "or",
   "...",
   "..",
-  "|>"
+  "|>",
 ];
 const OP2_RIGHT_ASSOC = ["=~", "++", "--"];
 
@@ -398,6 +398,11 @@ module.exports = grammar({
     // TOOO: elaborate to actual expression rule, stub
     _expression: ($) =>
       choice(
+        prec(PREC.PARENTHESIZED_EXPRESSION, parens($._expr)),
+        prec(PREC.EXPRESSION, $._expr)
+      ),
+    _expr: ($) =>
+      choice(
         $.number,
         $.atom,
         $.string,
@@ -414,7 +419,8 @@ module.exports = grammar({
         $.function_call,
         $.match,
         $.variable,
-        $.expr_op
+        $.expr_op,
+        $.lambda
         // $.alias, TODO: this breaks function calls etc
       ),
     _term: ($) =>
@@ -430,8 +436,8 @@ module.exports = grammar({
         $.map,
         $.module_attribute,
         $.sigil,
-        $.function_call,
-        $.match,
+        // $.function_call,
+        // $.match,
         $.variable
       ),
 
@@ -457,10 +463,29 @@ module.exports = grammar({
         seq("do", optional($._expression), "end"),
         seq(", do:", $._expression)
       ),
-    guard_clause: $ => seq("when", $._expression),
+    lambda: ($) => seq("fn", repeat($.lambda_clause), "end"),
+    lambda_clause: ($) =>
+      seq(
+        field(
+          "arguments",
+          optional(choice(parens(optional($.pattern)), $.pattern))
+        ),
+        optional($.guard_clause),
+        ARROW,
+        field("body", $._expression)
+      ),
+    guard_clause: ($) => seq("when", $._expression),
 
     match: ($) =>
       prec.right(PREC.MATCH, seq($._expression, EQUAL, $._expression)),
+
+    pattern: ($) =>
+      prec(
+        PREC.PATTERN,
+        choice($._term, $.variable, $._pat_list, $._pat_tuple)
+      ),
+    _pat_list: ($) => prec(PREC.PATTERN, $.list),
+    _pat_tuple: ($) => prec(PREC.PATTERN, $.tuple),
 
     function_call: ($) =>
       seq(field("name", $._function_name), args($._expression)),

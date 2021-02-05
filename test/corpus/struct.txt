@@ -44,4 +44,5 @@ Struct error with string key
 
 ---
 
-(source_file (struct (alias) (MISSING "}")) (expr_op (string) (ERROR) (number)) (ERROR))
+(source_file (struct (alias) (ERROR (string) (number))))
+

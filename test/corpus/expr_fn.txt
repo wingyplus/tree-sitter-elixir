@@ -1,0 +1,96 @@
+================================================================================
+Lambda constant without args
+================================================================================
+
+fn() -> :ok end
+
+fn -> false end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (lambda
+    (lambda_clause
+        (atom)))
+  (lambda
+    (lambda_clause
+        (boolean))))
+
+================================================================================
+Lambda - identity function
+================================================================================
+
+fn(x) -> x end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (lambda
+    (lambda_clause
+      (pattern
+        (variable))
+        (variable))))
+
+================================================================================
+Lambda - multiple clauses
+================================================================================
+
+fn
+  [] ->
+    :ok
+  args ->
+    args
+end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (lambda
+    (lambda_clause
+      (pattern
+        (list))
+          (atom))
+    (lambda_clause
+      (pattern
+        (variable))
+        (variable))))
+
+================================================================================
+Lambda - multiple clauses with guard
+================================================================================
+
+fn
+  0 ->
+    :zero
+  1 ->
+    :one
+  n when n > 1 ->
+    :many
+  _ ->
+    :negative
+end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (lambda
+    (lambda_clause
+      (pattern
+        (number))
+          (atom))
+    (lambda_clause
+      (pattern
+        (number))
+          (atom))
+    (lambda_clause
+      (pattern
+        (variable))
+      (guard_clause
+        (expr_op
+          (variable)
+          (number)))
+        (atom))
+    (lambda_clause
+      (pattern
+        (variable))
+          (atom))))

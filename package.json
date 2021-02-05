@@ -1,9 +1,12 @@
 {
   "name": "tree-sitter-elixir",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Tree Sitter for Elixir.",
   "main": "index.js",
   "author": "Thanabodee Charoenpiriyakij <wingyminus@gmail.com>",
+  "contributors": [
+    "Tonći Galić <tuxified@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "nan": "^2.14.2"
