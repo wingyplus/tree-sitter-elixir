@@ -102,7 +102,6 @@ const OP2_LEFT_ASSOC = [
   "+",
   "-",
   "/",
-  "&",
   "|",
   "!=",
   "<",
@@ -241,7 +240,7 @@ module.exports = grammar({
           seq(":", choice("'", '"'), repeat(/[0-9a-zA-Z_@]/), choice("'", '"'))
         )
       ),
-    // used in maps
+    // used in maps and keyword lists
     _reverse_atom: ($) =>
       token(
         choice(
@@ -314,6 +313,21 @@ module.exports = grammar({
         ),
         BRACKET_RIGHT
       ),
+
+    keyword_list: ($) =>
+      choice(
+        seq(BRACKET_LEFT, sepBy(COMMA, $.keywordlist_entry), BRACKET_RIGHT),
+      ),
+    _bare_keyword_list: ($) => seq(alias($._reverse_atom, $.atom), $._term),
+    keywordlist_entry: ($) =>
+      prec(
+        PREC.PARENTHESIZED_EXPRESSION,
+        choice(
+          seq(alias($._reverse_atom, $.atom), $._term),
+          seq(BRACE_LEFT, $.atom, COMMA, $._term, BRACE_RIGHT)
+        )
+      ),
+
     map: ($) =>
       seq(
         PERCENT,
@@ -330,7 +344,7 @@ module.exports = grammar({
     struct: ($) =>
       seq(
         PERCENT,
-        field("modulename", $.alias),
+        field("modulename", choice($.alias, $.variable)),
         BRACE_LEFT,
         optional(sepBy(COMMA, $.struct_entry)),
         BRACE_RIGHT
@@ -374,26 +388,7 @@ module.exports = grammar({
     identifier: ($) => /[a-z_]+/,
 
     _trailing_comma_separator_elements: ($) =>
-      seq(
-        sepBy(
-          COMMA,
-          choice(
-            $.number,
-            $.atom,
-            $.string,
-            $.binary_string,
-            $.boolean,
-            $.list,
-            $.tuple,
-            $.struct,
-            $.map,
-            $.sigil,
-            $.alias,
-            $.variable
-          )
-        ),
-        optional(COMMA)
-      ),
+      seq(sepBy(COMMA, $._term), optional(COMMA)),
 
     // TOOO: elaborate to actual expression rule, stub
     _expression: ($) =>
@@ -408,12 +403,13 @@ module.exports = grammar({
         $.string,
         $.binary_string,
         $.boolean,
+        $.keyword_list,
+        alias($._bare_keyword_list, $.keyword_list),
         $.list,
         $.tuple,
         $.struct,
         $.map,
         $.def,
-        $.defp,
         $.module_attribute,
         $.sigil,
         $.function_call,
@@ -430,6 +426,7 @@ module.exports = grammar({
         $.string,
         $.binary_string,
         $.boolean,
+        $.keyword_list,
         $.list,
         $.tuple,
         $.struct,
@@ -451,13 +448,13 @@ module.exports = grammar({
 
     def: ($) =>
       seq(
-        "def",
+        choice("def", "defp"),
         choice($.atom, $.identifier),
         optional(args($.variable)),
         optional($.guard_clause),
         $.do_block
       ),
-    defp: ($) => seq("defp", choice($.atom, $.identifier), $.do_block),
+
     do_block: ($) =>
       choice(
         seq("do", optional($._expression), "end"),
