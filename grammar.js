@@ -124,6 +124,7 @@ const OP2_LEFT_ASSOC = [
   "...",
   "..",
   "|>",
+  "<>",
 ];
 const OP2_RIGHT_ASSOC = ["=~", "++", "--"];
 

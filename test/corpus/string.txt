@@ -21,3 +21,14 @@ Hello
 ---
 
 (source_file (string))
+
+===
+Concatenation
+===
+
+"left" <> "right"
+
+---
+
+(source_file
+  (expr_op (string) (string)))

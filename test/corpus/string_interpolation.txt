@@ -50,3 +50,27 @@ Neat."""
   (string
     (interpolation (variable))
     (interpolation (expr_op (variable) (variable)))))
+
+===
+interpolating strings in strings
+===
+
+"This string #{"contains a string"}"
+
+---
+
+(source_file
+  (string
+    (interpolation (string))))
+
+===
+interpolating strings in strings with operator
+===
+
+"This string #{"contains" <> "operation"}"
+
+---
+
+(source_file
+  (string
+    (interpolation (expr_op (string) (string)))))
