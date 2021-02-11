@@ -9,6 +9,16 @@ Single line
 (source_file (charlist))
 
 ============
+Single line with escaped quote
+============
+
+'escape \' quote'
+
+---
+
+(source_file (charlist))
+
+============
 Multi line
 ============
 
@@ -21,3 +31,21 @@ Hello
 ---
 
 (source_file (charlist))
+
+============
+Multi line with internal quote
+============
+
+'''
+Hello
+
+This isn't a string.
+
+It's a charlist
+'''
+
+---
+
+(source_file (charlist))
+
+
