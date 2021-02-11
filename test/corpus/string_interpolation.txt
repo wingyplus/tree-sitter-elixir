@@ -1,0 +1,52 @@
+======================
+basic
+======================
+"#{9999}"
+"#{var_name}"
+
+---
+
+(source_file
+  (string (interpolation (number)))
+  (string (interpolation (variable))))
+
+===
+with operator
+===
+
+"#{var_name + 9999}"
+
+---
+
+(source_file
+  (string (interpolation (expr_op (variable) (number)))))
+
+===
+with text
+===
+
+"x = #{x}, 2x = #{x * 2}"
+
+---
+
+(source_file
+  (string
+    (interpolation (variable))
+    (interpolation (expr_op (variable) (number)))))
+
+===
+in mutil line strings
+===
+
+"""
+This muilti line string,
+includes #{interpolation} with some #{oper * ations}
+
+Neat."""
+
+---
+
+(source_file
+  (string
+    (interpolation (variable))
+    (interpolation (expr_op (variable) (variable)))))
