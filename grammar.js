@@ -163,6 +163,12 @@ const STAR = "*";
 const TILDE = "~";
 
 
+// TODO: unicode support.
+const singleLineCharlist = seq("'", repeat(/./), "'");
+
+// TODO: unicode support.
+const multiLineCharlist = seq("'''", repeat(choice(/./, /\n/)), "'''");
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Precedences
@@ -263,8 +269,10 @@ module.exports = grammar({
       seq('"', repeat(choice($.interpolation, /./)), '"'),
       // multi line string
       seq('"""', repeat(choice($.interpolation, choice(/./, /\n/))), '"""')),
-
     interpolation: ($) => seq("#{", repeat($._expression), "}"),
+
+    charlist: ($) => token(choice(singleLineCharlist, multiLineCharlist)),
+
 
     binary_string: ($) =>
       seq(BINARY_LEFT, optional(sepBy(COMMA, $.bin_part)), BINARY_RIGHT),
@@ -387,7 +395,7 @@ module.exports = grammar({
       ),
 
     variable: ($) =>
-      /[_a-z\xC0-\xD6\xD8-\xDE\xDF-\xF6\xF8-\xFF][_a-zA-Z0-9\xC0-\xD6\xD8-\xDE]*/,
+      /[_a-z\xC0-\xD6\xD8-\xDE\xDF-\xF6\xF8-\xFF][_a-zA-Z0-9\xC0-\xD6\xD8-\xDE]*[?!]?/,
     identifier: ($) => /[a-z_]+/,
 
     _trailing_comma_separator_elements: ($) =>
@@ -404,6 +412,7 @@ module.exports = grammar({
         $.number,
         $.atom,
         $.string,
+        $.charlist,
         $.binary_string,
         $.boolean,
         $.keyword_list,
