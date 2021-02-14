@@ -96,7 +96,7 @@ const symbolOperators = choice(
   "\\\\" // "\\"
 );
 
-const OP1 = ["+", "-", "!", "not", "bnot"];
+const OP1 = ["+", "-", "!", "not", "bnot", "^"];
 const OP2_LEFT_ASSOC = [
   "*",
   "+",
@@ -162,7 +162,6 @@ const UNDERSCORE = "_";
 const STAR = "*";
 const TILDE = "~";
 
-
 // TODO: unicode support.
 const singleLineCharlist = seq("'", repeat(/./), "'");
 
@@ -219,6 +218,7 @@ module.exports = grammar({
   // TODO: figure out why this wreaks havoc
   // word: ($) => $.identifier,
   // extras: ($) => [/[\x00-\x20\x80-\xA0]/, $.comment],
+  // inline: ($) => [$._term, $._expression],
 
   rules: {
     source_file: ($) => repeat(choice($.defmodule, $._expression)),
@@ -264,15 +264,17 @@ module.exports = grammar({
     alias: ($) => seq(/[A-Z]/, repeat(/[0-9a-zA-Z_.]/)),
 
     // TODO: unicode string support
-    string: ($) => choice(
-      // single line string
-      seq('"', repeat(choice($.interpolation, /./)), '"'),
-      // multi line string
-      seq('"""', repeat(choice($.interpolation, choice(/./, /\n/))), '"""')),
-    interpolation: ($) => seq("#{", repeat($._expression), "}"),
+    string: ($) =>
+      choice(
+        // single line string
+        seq('"', repeat(choice($.interpolation, /./, /\\"/)), '"'),
+        // multi line string
+        seq('"""', repeat(choice($.interpolation, /./, /\n/)), '"""')
+      ),
+    interpolation: ($) => seq("#{", optional($._expression), "}"),
 
     charlist: ($) => token(choice(singleLineCharlist, multiLineCharlist)),
-
+    char: ($) => seq(QUESTION, /[^\s]/),
 
     binary_string: ($) =>
       seq(BINARY_LEFT, optional(sepBy(COMMA, $.bin_part)), BINARY_RIGHT),
@@ -327,7 +329,7 @@ module.exports = grammar({
 
     keyword_list: ($) =>
       choice(
-        seq(BRACKET_LEFT, sepBy(COMMA, $.keywordlist_entry), BRACKET_RIGHT),
+        seq(BRACKET_LEFT, sepBy(COMMA, $.keywordlist_entry), BRACKET_RIGHT)
       ),
     _bare_keyword_list: ($) => seq(alias($._reverse_atom, $.atom), $._term),
     keywordlist_entry: ($) =>
@@ -399,7 +401,7 @@ module.exports = grammar({
     identifier: ($) => /[a-z_]+/,
 
     _trailing_comma_separator_elements: ($) =>
-      seq(sepBy(COMMA, $._term), optional(COMMA)),
+      seq(sepBy(COMMA, $._expression), optional(COMMA)),
 
     // TOOO: elaborate to actual expression rule, stub
     _expression: ($) =>
@@ -412,8 +414,9 @@ module.exports = grammar({
         $.number,
         $.atom,
         $.string,
-        $.charlist,
         $.binary_string,
+        $.char,
+        $.charlist,
         $.boolean,
         $.keyword_list,
         alias($._bare_keyword_list, $.keyword_list),
@@ -428,7 +431,8 @@ module.exports = grammar({
         $.match,
         $.variable,
         $.expr_op,
-        $.lambda
+        $.lambda,
+        $.for_list_comprehension
         // $.alias, TODO: this breaks function calls etc
       ),
     _term: ($) =>
@@ -436,6 +440,8 @@ module.exports = grammar({
         $.number,
         $.atom,
         $.string,
+        $.char,
+        $.charlist,
         $.binary_string,
         $.boolean,
         $.keyword_list,
@@ -544,6 +550,27 @@ module.exports = grammar({
             field("rhs", $._expression)
           )
         )
+      ),
+
+    for_list_comprehension: ($) =>
+      seq(
+        "for",
+        repeat1(choice($.for_list_generator, $.for_bitstring_generator)),
+        optional(seq(COMMA, $.for_list_filter)),
+        // optional(seq(COMMA, "into: ", $._term)),
+        // optional(seq(COMMA, "reduce: ", $._term)),
+        // optional(seq(COMMA, "unique: ", $.boolean)),
+        $.do_block
+      ),
+    for_list_generator: ($) => seq($._expression, IN_OP, $._expression),
+    for_list_filter: ($) => sepBy(COMMA, $._expression),
+    for_bitstring_generator: ($) =>
+      seq(
+        BINARY_LEFT,
+        sepBy(COMMA, $.bin_part),
+        IN_OP,
+        choice($.binary_string, $.variable, $.function_call),
+        BINARY_RIGHT
       ),
   },
 });
