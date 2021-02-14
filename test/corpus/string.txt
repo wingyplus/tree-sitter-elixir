@@ -1,5 +1,5 @@
 ============
-Single line
+String - Single line
 ============
 
 "1234Hello WOrld"
@@ -9,7 +9,7 @@ Single line
 (source_file (string))
 
 ============
-Single line with escaped double quote
+String - Single line with escaped double quote
 ============
 
 "1234Hello \" WOrld"
@@ -19,7 +19,7 @@ Single line with escaped double quote
 (source_file (string))
 
 ============
-Multi Line
+String - Multi Line
 ============
 
 """
@@ -33,7 +33,7 @@ Hello
 (source_file (string))
 
 ============
-Multi Line with internal double quotes
+String - Multi Line with internal double quotes
 ============
 
 """
