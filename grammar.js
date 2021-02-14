@@ -124,6 +124,7 @@ const OP2_LEFT_ASSOC = [
   "...",
   "..",
   "|>",
+  "<>",
 ];
 const OP2_RIGHT_ASSOC = ["=~", "++", "--"];
 
@@ -161,11 +162,6 @@ const UNDERSCORE = "_";
 const STAR = "*";
 const TILDE = "~";
 
-// TODO: unicode support.
-const singleLineString = seq('"', repeat(/./), '"');
-
-// TODO: unicode support.
-const multiLineString = seq('"""', repeat(choice(/./, /\n/)), '"""');
 
 // TODO: unicode support.
 const singleLineCharlist = seq("'", repeat(/./), "'");
@@ -267,9 +263,16 @@ module.exports = grammar({
       ),
     alias: ($) => seq(/[A-Z]/, repeat(/[0-9a-zA-Z_.]/)),
 
+    // TODO: unicode string support
+    string: ($) => choice(
+      // single line string
+      seq('"', repeat(choice($.interpolation, /./)), '"'),
+      // multi line string
+      seq('"""', repeat(choice($.interpolation, choice(/./, /\n/))), '"""')),
+    interpolation: ($) => seq("#{", repeat($._expression), "}"),
+
     charlist: ($) => token(choice(singleLineCharlist, multiLineCharlist)),
 
-    string: ($) => token(choice(singleLineString, multiLineString)),
 
     binary_string: ($) =>
       seq(BINARY_LEFT, optional(sepBy(COMMA, $.bin_part)), BINARY_RIGHT),
