@@ -1,10 +1,10 @@
 name: build
 
-on:
+on: 
   push:
-  pull_request:
     branches:
-      - "**:**" # For forks
+      - main
+  pull_request:
 
 jobs:
   test:
