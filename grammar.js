@@ -96,7 +96,7 @@ const symbolOperators = choice(
   "\\\\" // "\\"
 );
 
-const OP1 = ["+", "-", "!", "not", "bnot", "^"];
+const OP1 = ["+", "-", "!", "not", "bnot", "^", "~~~" ];
 const OP2_LEFT_ASSOC = [
   "*",
   "+",
@@ -125,8 +125,10 @@ const OP2_LEFT_ASSOC = [
   "..",
   "|>",
   "<>",
+  // custom operators, can be used by libs
+  "<<~", "~>>", "<~", "~>", "<~>", "<|>", "+++", "---"
 ];
-const OP2_RIGHT_ASSOC = ["=~", "++", "--"];
+const OP2_RIGHT_ASSOC = ["=~", "++", "--", "::"];
 
 const ARROW = "->";
 const AT_OP = "@";
