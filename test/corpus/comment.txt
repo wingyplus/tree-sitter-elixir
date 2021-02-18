@@ -68,9 +68,9 @@ Comment in nested structure
       (comment)
       (number))))
  
- ====
- Doesn't match inside string
- ====
+================================================================================
+Doesn't match inside string
+================================================================================
  
  # this is a comment
  "this is #{interpolation}"
