@@ -271,7 +271,7 @@ module.exports = grammar({
           )
         )
       ),
-    alias: ($) => seq(/[A-Z]/, repeat(/[0-9a-zA-Z_.]/)),
+    alias: ($) => token(sepBy(DOT_OP, seq(/[A-Z]/, repeat(/[0-9a-zA-Z_]/)))),
 
     // TODO: unicode string support
     string: ($) =>
@@ -456,8 +456,8 @@ module.exports = grammar({
         $.case,
         $.cond,
         $.if,
-        $.unless
-        // $.alias, TODO: this breaks function calls etc
+        $.unless,
+        $.alias,
       ),
     _term: ($) =>
       choice(
