@@ -1,6 +1,6 @@
 {
   "name": "elixir",
-  "word": "identifier",
+  "word": "_identifier",
   "rules": {
     "source_file": {
       "type": "REPEAT",
@@ -2132,12 +2132,16 @@
       ]
     },
     "variable": {
-      "type": "PATTERN",
-      "value": "[_a-z\\xC0-\\xD6\\xD8-\\xDE\\xDF-\\xF6\\xF8-\\xFF][_a-zA-Z0-9\\xC0-\\xD6\\xD8-\\xDE]*[?!]?"
+      "type": "SYMBOL",
+      "name": "_identifier"
     },
     "identifier": {
+      "type": "SYMBOL",
+      "name": "_identifier"
+    },
+    "_identifier": {
       "type": "PATTERN",
-      "value": "[a-z_]+"
+      "value": "[_a-z\\xC0-\\xD6\\xD8-\\xDE\\xDF-\\xF6\\xF8-\\xFF][_a-zA-Z0-9\\xC0-\\xD6\\xD8-\\xDE]*[?!]?"
     },
     "_trailing_comma_separator_elements": {
       "type": "SEQ",
@@ -2465,8 +2469,21 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "atom"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "("
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "STRING",
+                  "value": ")"
+                }
+              ]
             },
             {
               "type": "SYMBOL",
