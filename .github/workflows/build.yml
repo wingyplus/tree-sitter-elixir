@@ -19,6 +19,14 @@ jobs:
         with:
           node-version: "12"
 
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v1
+
       - name: Display Node versions
         run: |
           node --version
@@ -29,6 +37,16 @@ jobs:
 
       - name: Test corpus & parse examples
         run: npm test
+
+      - name: Display Rust versions
+        run: |
+          rustc --version
+          cargo --version
+
+      - name: Test Rust bindings
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
 
   publish:
     name: Publish playground
