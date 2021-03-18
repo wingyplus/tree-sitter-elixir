@@ -35,7 +35,12 @@ jobs:
       - name: Test corpus & parse examples
         run: npm test
 
-      - name: Test rust bindings
+      - name: Display Rust versions
+        run: |
+          rustc --version
+          cargo --version
+
+      - name: Test Rust bindings
         uses: actions-rs/cargo@v1
         with:
           command: test
