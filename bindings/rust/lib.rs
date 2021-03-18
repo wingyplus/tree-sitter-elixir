@@ -23,9 +23,22 @@ pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 mod tests {
     #[test]
     fn can_load_grammar() {
+        let code = r#"
+            defmodule Test do
+              def foo() do
+                1
+              end
+            end
+        "#;
         let mut parser = tree_sitter::Parser::new();
         parser
             .set_language(super::language())
             .expect("Error loading Elixir grammar");
+        let parsed = parser.parse(code, None).unwrap();
+
+        assert_eq!(
+            parsed.root_node().to_sexp(),
+            "(source_file (defmodule modulename: (alias) (do_block (def (identifier) (do_block (number))))))"
+        );
     }
 }
