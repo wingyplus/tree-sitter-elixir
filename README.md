@@ -1,13 +1,12 @@
 # tree-sitter-elixir
 
-[![Build Status](https://github.com/Tuxified/tree-sitter-elixir/workflows/build/badge.svg)](https://github.com/Tuxified/tree-sitter-elixir/actions)
+[![Build Status](https://github.com/wingyplus/tree-sitter-elixir/workflows/build/badge.svg)](https://github.com/wingyplus/tree-sitter-elixir/actions)
 
 Elixir grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter), you can try it out in the [playground](https://tuxified.github.io/tree-sitter-elixir/).
 
 ## References
 
 - [Elixirs parser](https://github.com/elixir-lang/elixir/blob/master/lib/elixir/src/elixir_parser.yrl)
-- [Forked from](https://github.com/wingyplus/tree-sitter-elixir) by @wingyplus
 - [Tree sitter Erlang](https://github.com/abstractmachineslab/tree-sitter-erlang/) by @ostera
 - [IntelliJ Elixir plugin](https://github.com/KronicDeth/intellij-elixir/blob/master/src/org/elixir_lang/Elixir.flex) by @kronicdeth
 
@@ -200,4 +199,4 @@ In case you want a taste, take it for a spin on the [playground](https://tuxifie
 
 ### I have a different question / would like to chat in private
 
-Feel free to open an issue with your question. My handle on Twitter/Elixir Forum/Slack/[Elixir Discord](https://discord.gg/elixir) is Tuxified, it's also the first part of my @gmail.com email adres.
+Feel free to open an issue or post it on Elixir Forum with your question. :)
