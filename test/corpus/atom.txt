@@ -11,7 +11,13 @@ Atom - Unquoted
 
 ---
 
-(source_file (atom) (atom) (atom) (atom) (atom) (atom))
+(source_file
+  (atom)
+  (atom)
+  (atom)
+  (atom)
+  (atom)
+  (atom))
 
 ==============
 Atom - Operator
@@ -24,7 +30,11 @@ Atom - Operator
 
 ---
 
-(source_file (atom) (atom) (atom) (atom))
+(source_file
+  (atom)
+  (atom)
+  (atom)
+  (atom))
 
 ==============
 Atom - Quoted
@@ -36,3 +46,13 @@ Atom - Quoted
 ---
 
 (source_file (atom) (atom))
+
+==============
+Atom - Unicode
+==============
+
+{:runtime, :time_μs, :"£", "£", '£', :こんにちは, :Ólá, :olá, :Olá}
+
+---
+
+(source_file (tuple (atom) (atom) (atom) (string) (charlist) (atom) (atom) (atom) (atom)))

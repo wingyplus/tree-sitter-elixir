@@ -1,0 +1,103 @@
+============
+Module function zero arity function
+============
+
+def test do
+end
+
+---
+
+(source_file (def (identifier) (do_block)))
+
+============
+Module function zero arity function with parens
+============
+
+def test() do
+end
+
+---
+
+(source_file (def (identifier) (do_block)))
+
+============
+Module function single arity function
+============
+
+def test(name) do
+end
+
+---
+
+(source_file (def (identifier) (variable) (do_block)))
+
+============
+Module function plural arity function
+============
+
+def test(first_name, last_name) do
+end
+
+---
+
+(source_file (def (identifier) (variable) (variable) (do_block)))
+
+============
+Module function short hand function
+============
+
+def test(), do: "Hello world"
+
+---
+
+(source_file (def (identifier) (do_block (string))))
+
+============
+Module function with guard clause
+============
+
+def test(first_name, last_name) when is_nil(first_name) do
+  "a simpler test"
+end
+
+---
+
+(source_file (def (identifier) (variable) (variable) (guard_clause (function_call (computed_function_name (variable)) (variable))) (do_block (string))))
+
+
+============
+Module function with literal pattern
+============
+
+def hello("world"), do: "Hello world"
+def hello(name), do: "Hello #{name}"
+
+---
+
+(source_file
+  (def (identifier) (string) (do_block (string)))
+  (def (identifier) (variable) (do_block (string (interpolation (variable))))))
+
+============
+Module function with optional argument
+============
+
+def test(name \\ "You") do
+  "Hello #{name}"
+end
+
+---
+
+(source_file (def (identifier) (optional_argument (variable) (string)) (do_block (string (interpolation (variable))))))
+
+============
+Module function with obligatory and optional arguments
+============
+
+def test(amount, name \\ "You") do
+  "Hello #{name} times #{amount}"
+end
+
+---
+
+(source_file (def (identifier) (variable) (optional_argument (variable) (string)) (do_block (string (interpolation (variable)) (interpolation (variable))))))

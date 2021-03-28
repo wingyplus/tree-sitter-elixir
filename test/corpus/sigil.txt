@@ -1,0 +1,63 @@
+============
+Sigil empty
+============
+
+~r<>
+
+---
+
+(source_file (sigil))
+
+============
+Sigil string
+============
+
+~s"1234Hello WOrld"
+
+---
+
+(source_file (sigil))
+
+============
+Sigil braced
+============
+
+~s{1234Hello WOrld}
+
+---
+
+(source_file (sigil))
+
+============
+Sigil multiline
+============
+
+~q"""
+Hello
+
+ This is multi line.
+"""
+
+---
+
+(source_file (sigil))
+
+============
+Sigil regex with modifier
+============
+
+~r/[a-z]/fisum
+
+---
+
+(source_file (sigil))
+
+============
+Sigil accepts only single char
+============
+
+~error(a-z)
+
+---
+
+(source_file (ERROR) (function_call (computed_function_name (variable)) (expr_op (variable) (variable))))

@@ -1,0 +1,65 @@
+===========
+Keyword empty list
+===========
+
+[]
+
+---
+
+(source_file (list))
+
+===========
+Keyword list shorthand syntax
+===========
+
+[a: 5]
+
+---
+
+(source_file
+  (keyword_list
+    (keywordlist_entry (atom) (number))
+  ))
+
+===========
+Keyword list tuple syntax
+===========
+
+[{:a, 6}, {:b, "7"}]
+
+---
+
+(source_file
+  (keyword_list
+    (keywordlist_entry (atom) (number))
+    (keywordlist_entry (atom) (string))))
+
+
+===========
+Keyword list error - shorthand before tuple syntax
+===========
+
+[a: 6, {:b, "7"}]
+
+---
+
+
+(source_file (keyword_list
+    (keywordlist_entry (atom) (number))
+    (keywordlist_entry (atom) (string))
+  ))
+
+====================
+Keyword list mixed - tuples + shorthand
+====================
+
+[{:a, 1}, {:b, "2"}, c: 3, d: 0b100]
+
+---
+(source_file
+  (keyword_list
+    (keywordlist_entry (atom) (number))
+    (keywordlist_entry (atom) (string))
+    (keywordlist_entry (atom) (number))
+    (keywordlist_entry (atom) (number))
+  ))

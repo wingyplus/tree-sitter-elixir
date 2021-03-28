@@ -1,0 +1,48 @@
+===========
+Struct empty
+===========
+
+%Test{}
+
+---
+
+(source_file (struct (alias)))
+
+
+================================================================================
+Struct with one key and value
+================================================================================
+
+%Test{ :hello => "world" }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct (alias)
+    (struct_entry
+        (atom) (string))))
+
+================================================================================
+Struct with many keys and values
+================================================================================
+
+%Test{ hello: :joe, goodbye: "moe" }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct (alias)
+    (struct_entry (atom) (atom))
+    (struct_entry (atom) (string))))
+
+
+====================
+Struct error with string key
+====================
+
+%Test{"string" => 2}
+
+---
+
+(source_file (ERROR (alias) (expr_op (string) (ERROR) (number))))
+

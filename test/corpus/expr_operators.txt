@@ -1,0 +1,114 @@
+================================================================================
+Unary operators
+================================================================================
+
++a
+not a
+bnot a
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_op
+    (variable))
+  (expr_op
+    (variable))
+  (expr_op
+    (variable)))
+
+================================================================================
+Operators with left associativity
+================================================================================
+
+x * 1 * y
+x / 1 / y
+x and 1 and y
+x &&& 1 &&& y
+x + 1 + y
+x - 1 - y
+x ||| 1 ||| y
+x <<< 1 <<< y
+x >>> 1 >>> y
+x ^^^ 1 ^^^ y
+x or 1 or y
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_op
+    (expr_op
+      (variable)
+      (number))
+    (variable))
+  (expr_op
+    (expr_op
+      (variable)
+      (number))
+    (variable))
+  (expr_op
+    (expr_op
+      (variable)
+      (number))
+    (variable))
+  (expr_op
+    (expr_op
+      (variable)
+      (number))
+    (variable))
+  (expr_op
+    (expr_op
+      (variable)
+      (number))
+    (variable))
+  (expr_op
+    (expr_op
+      (variable)
+      (number))
+    (variable))
+  (expr_op
+    (expr_op
+      (variable)
+      (number))
+    (variable))
+  (expr_op
+    (expr_op
+      (variable)
+      (number))
+    (variable))
+  (expr_op
+    (expr_op
+      (variable)
+      (number))
+    (variable))
+  (expr_op
+    (expr_op
+      (variable)
+      (number))
+    (variable))
+  (expr_op
+    (expr_op
+      (variable)
+      (number))
+    (variable)))
+
+================================================================================
+op right associativity
+================================================================================
+
+a ++ b ++ c
+a -- b -- c
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_op
+    (variable)
+    (expr_op
+      (variable)
+      (variable)))
+  (expr_op
+    (variable)
+    (expr_op
+      (variable)
+      (variable))))

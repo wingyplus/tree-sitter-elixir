@@ -1,0 +1,72 @@
+============
+Charlist - Single line
+============
+
+'1234Hello WOrld'
+
+---
+
+(source_file (charlist))
+
+============
+Single line with escaped quote
+============
+
+'escape \' quote'
+
+---
+
+(source_file (charlist))
+
+============
+Charlist - Multi line
+============
+
+'''
+Hello
+
+ This is multi line.
+'''
+
+---
+
+(source_file (charlist))
+
+============
+Charlist - Multi line with internal quote
+============
+
+'''
+Hello
+
+This isn't a string.
+
+It's a charlist
+'''
+
+---
+
+(source_file (charlist))
+
+
+============
+Char - Single
+============
+
+?A
+?A
+?5
+
+---
+
+(source_file (char) (char) (char))
+
+============
+Char - list
+============
+
+[?H, ?e, ?l, ?l, ?o]
+
+---
+
+(source_file (list (char) (char) (char) (char) (char)))
