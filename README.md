@@ -1,3 +1,5 @@
+**NOTE**: This repository is no longer maintain. Please use https://github.com/elixir-lang/tree-sitter-elixir which's a tree-sitter implementation maintained by Elixir Team.
+
 # tree-sitter-elixir
 
 [![Build Status](https://github.com/wingyplus/tree-sitter-elixir/workflows/build/badge.svg)](https://github.com/wingyplus/tree-sitter-elixir/actions)
